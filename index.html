@@ -641,7 +641,7 @@ setTimeout(function(){
 </div>
 
 <!-- WAITLIST OVERLAY -->
-<!-- <div class="wl-overlay" id="wlOverlay">
+<div class="wl-overlay" id="wlOverlay">
   <div class="wl-panel">
     <div class="wl-panel-top-rule"></div>
     <button class="wl-close" id="wlClose">&#x2715;</button>
@@ -664,7 +664,7 @@ setTimeout(function(){
     <button class="wl-submit" id="wlSubmit"><span>Join Waitlist</span></button>
     <p class="wl-note">We'll notify you as soon as a spot opens. No spam, ever.</p>
   </div>
-</div> -->
+</div>
 
 <!-- EMAIL POPUP -->
 <div class="email-popup" id="emailPopup">
@@ -1266,22 +1266,7 @@ setTimeout(function(){
 
 <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 (function(){
-/* ─── CURSOR ─────────────────────────── */
-var dot=document.getElementById('cursorDot'),ring=document.getElementById('cursorRing');
-var mx=0,my=0,rx=0,ry=0;
-document.addEventListener('mousemove',function(e){
-  mx=e.clientX; my=e.clientY;
-  dot.style.left=mx+'px'; dot.style.top=my+'px';
-});
-(function animate(){
-  rx+=(mx-rx)*.12; ry+=(my-ry)*.12;
-  ring.style.left=rx+'px'; ring.style.top=ry+'px';
-  requestAnimationFrame(animate);
-})();
-document.querySelectorAll('a,button,.gal-item,.ba-card,.deal-card,.nc-info-box,.about-cred,.about-soc,.svc-tab,.faq-q').forEach(function(el){
-  el.addEventListener('mouseenter',function(){document.body.classList.add('cursor-hover')});
-  el.addEventListener('mouseleave',function(){document.body.classList.remove('cursor-hover')});
-});
+/* ─── CURSOR (disabled — elements hidden) ────────────────── */
 
 /* ─── SCROLL REVEAL ──────────────────── */
 var revealEls=document.querySelectorAll('.reveal,.reveal-left,.reveal-right');
