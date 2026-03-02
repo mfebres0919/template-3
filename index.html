@@ -1,0 +1,1418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Flawless Wig Studio</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Cinzel:wght@400;500;600;700&family=Jost:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&display=swap" rel="stylesheet">
+<script>
+  (function(w, d, t, h, s, n) {
+    w.FlodeskObject = n;
+    var fn = function() { (w[n].q = w[n].q || []).push(arguments); };
+    w[n] = w[n] || fn;
+    var f = d.getElementsByTagName(t)[0];
+    var v = '?v=' + Math.floor(new Date().getTime() / (120 * 1000)) * 60;
+    var sm = d.createElement(t); sm.async = true; sm.type = 'module';
+    sm.src = h + s + '.mjs' + v; f.parentNode.insertBefore(sm, f);
+    var sn = d.createElement(t); sn.async = true; sn.noModule = true;
+    sn.src = h + s + '.js' + v; f.parentNode.insertBefore(sn, f);
+  })(window, document, 'script', 'https://assets.flodesk.com', '/universal', 'fd');
+</script>
+<script>window.fd('form', { formId: '69a48e33bb206090e7ad1921' });</script>
+<style>
+/* ─── RESET ─────────────────────────────────────────────── */
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{overflow-x:hidden;overscroll-behavior-y:none;-webkit-overflow-scrolling:touch}
+img{display:block;max-width:100%}
+button{font-family:inherit;cursor:pointer;border:none;background:none}
+a{text-decoration:none;color:inherit}
+
+/* ─── DESIGN TOKENS ─────────────────────────────────────── */
+:root{
+  --black:#070707;
+  --black2:#0F0F0F;
+  --black3:#171717;
+  --black4:#1E1E1E;
+  --grey:#6A6A6A;
+  --grey-lt:#9E9E9E;
+  --grey-border:#252525;
+  --grey-border-lt:#E2E2E2;
+  --white:#FEFEFE;
+  --offwhite:#F9F8F6;
+  --cream:#F3F1EC;
+  --gold:#C8A97E;
+  --gold-lt:#E8D5B7;
+  --gold-dk:#9A7A52;
+  --pad:clamp(20px,5vw,80px);
+  --nav-h:68px;
+  --serif:'Cormorant Garamond',serif;
+  --display:'Cinzel',serif;
+  --sans:'Jost',sans-serif;
+}
+body{font-family:var(--sans);background:var(--white);color:var(--black);-webkit-font-smoothing:antialiased}
+
+/* ─── CUSTOM CURSOR ──────────────────────────────────────── */
+.cursor-dot,.cursor-ring{display:none}
+
+/* ─── GRAIN OVERLAY ─────────────────────────────────────── */
+.grain{position:fixed;inset:0;z-index:9998;pointer-events:none;opacity:.028}
+.grain svg{width:100%;height:100%}
+
+/* ─── LOADER ─────────────────────────────────────────────── */
+#pageLoader{position:fixed;inset:0;z-index:9997;background:var(--black);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:24px;transition:opacity .9s cubic-bezier(.4,0,.2,1),visibility .9s}
+#pageLoader.done{opacity:0;visibility:hidden;pointer-events:none}
+.loader-brand{text-align:center}
+.loader-logo{font-family:var(--display);font-size:clamp(1.2rem,3.5vw,1.8rem);font-weight:400;letter-spacing:.22em;color:var(--white);opacity:0;animation:loaderFadeIn .8s .2s ease forwards}
+.loader-sub{font-family:var(--serif);font-size:.82rem;letter-spacing:.3em;color:var(--gold);opacity:0;animation:loaderFadeIn .8s .5s ease forwards;font-style:italic;margin-top:4px}
+.loader-bar-wrap{width:60px;height:1px;background:rgba(255,255,255,.08);overflow:hidden;opacity:0;animation:loaderFadeIn .5s .4s ease forwards}
+.loader-bar{height:100%;width:0;background:linear-gradient(90deg,var(--gold-dk),var(--gold),var(--gold-lt));animation:fillBar 1.6s .6s ease forwards}
+@keyframes fillBar{from{width:0}to{width:100%}}
+@keyframes loaderFadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+
+/* ─── SCROLL REVEAL ─────────────────────────────────────── */
+.reveal{opacity:0;transform:translateY(40px);transition:opacity .85s cubic-bezier(.4,0,.2,1),transform .85s cubic-bezier(.4,0,.2,1)}
+.reveal.visible{opacity:1;transform:translateY(0)}
+.reveal-left{opacity:0;transform:translateX(-40px);transition:opacity .85s cubic-bezier(.4,0,.2,1),transform .85s cubic-bezier(.4,0,.2,1)}
+.reveal-left.visible{opacity:1;transform:translateX(0)}
+.reveal-right{opacity:0;transform:translateX(40px);transition:opacity .85s cubic-bezier(.4,0,.2,1),transform .85s cubic-bezier(.4,0,.2,1)}
+.reveal-right.visible{opacity:1;transform:translateX(0)}
+.stagger-1{transition-delay:.1s}.stagger-2{transition-delay:.2s}.stagger-3{transition-delay:.3s}.stagger-4{transition-delay:.4s}.stagger-5{transition-delay:.5s}
+
+/* ─── UTILITIES ──────────────────────────────────────────── */
+.tag{display:inline-flex;align-items:center;gap:10px;font-family:var(--sans);font-size:.5rem;letter-spacing:.34em;text-transform:uppercase;color:var(--gold);font-weight:500;margin-bottom:14px}
+.tag::before{content:'';width:24px;height:1px;background:var(--gold);flex-shrink:0}
+.tag-w{color:rgba(255,255,255,.45)}
+.tag-w::before{background:rgba(255,255,255,.3)}
+.display{font-family:var(--display);font-size:clamp(2rem,5.8vw,3.8rem);font-weight:400;line-height:1.05;letter-spacing:.03em;color:var(--black)}
+.display em{font-style:normal;color:var(--gold);opacity:.8}
+.display-serif{font-family:var(--serif);font-size:clamp(2.4rem,7vw,4.8rem);font-weight:300;font-style:italic;line-height:1.05;color:var(--black)}
+.display-w{color:var(--white)}
+.display-w em{color:var(--gold-lt);opacity:1}
+.gold-line{display:block;width:32px;height:1.5px;background:linear-gradient(90deg,var(--gold-dk),var(--gold));margin-bottom:18px}
+.gold-divider{display:flex;align-items:center;gap:14px;justify-content:center;margin:0 auto 20px}
+.gold-divider::before,.gold-divider::after{content:'';flex:1;max-width:60px;height:1px;background:linear-gradient(90deg,transparent,var(--gold))}
+.gold-divider::after{background:linear-gradient(90deg,var(--gold),transparent)}
+.gold-divider-inner{color:var(--gold);font-size:.52rem;letter-spacing:.14em}
+
+/* ─── BUTTONS ────────────────────────────────────────────── */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:14px 32px;font-size:.52rem;letter-spacing:.24em;text-transform:uppercase;font-weight:600;transition:all .35s cubic-bezier(.4,0,.2,1);white-space:nowrap;cursor:pointer;font-family:var(--sans);position:relative;overflow:hidden}
+.btn::before{content:'';position:absolute;inset:0;transform:translateX(-105%);transition:transform .45s cubic-bezier(.4,0,.2,1)}
+.btn:hover::before{transform:translateX(0)}
+.btn:active{transform:scale(.97)}
+.btn-b{background:var(--black);color:var(--white);border:1px solid var(--black)}
+.btn-b::before{background:var(--gold-dk)}
+.btn-b:hover{border-color:var(--gold-dk);box-shadow:0 12px 40px rgba(0,0,0,.3),0 4px 12px rgba(200,169,126,.15)}
+.btn-b span{position:relative;z-index:1}
+.btn-w{background:var(--white);color:var(--black);border:1px solid var(--white)}
+.btn-w::before{background:var(--gold-lt)}
+.btn-w:hover{box-shadow:0 12px 40px rgba(255,255,255,.12)}
+.btn-w span{position:relative;z-index:1}
+.btn-o{border:1px solid var(--black);color:var(--black);background:transparent}
+.btn-o::before{background:var(--black)}
+.btn-o:hover{color:var(--white)}
+.btn-o span{position:relative;z-index:1}
+.btn-ow{border:1px solid rgba(255,255,255,.25);color:var(--white);background:transparent}
+.btn-ow::before{background:rgba(255,255,255,.08)}
+.btn-ow:hover{border-color:rgba(255,255,255,.5)}
+.btn-ow span{position:relative;z-index:1}
+.btn-gold{background:linear-gradient(135deg,var(--gold-dk),var(--gold));color:var(--white);border:1px solid var(--gold)}
+.btn-gold::before{background:var(--gold-dk)}
+.btn-gold:hover{box-shadow:0 12px 40px rgba(200,169,126,.35)}
+.btn-gold span{position:relative;z-index:1}
+
+/* ─── PROMO BANNER ───────────────────────────────────────── */
+.promo-banner{position:fixed;top:0;left:0;right:0;z-index:210;background:linear-gradient(90deg,var(--black) 0%,#111 50%,var(--black) 100%);padding:9px var(--pad);display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap;transition:max-height .4s,opacity .4s,padding .4s;overflow:hidden;max-height:120px;border-bottom:1px solid rgba(200,169,126,.1)}
+.promo-banner.hidden{max-height:0;opacity:0;pointer-events:none;padding:0}
+.promo-text{font-size:.5rem;letter-spacing:.22em;text-transform:uppercase;font-weight:500;color:rgba(255,255,255,.45);text-align:center;line-height:1.6}
+.promo-text strong{color:var(--gold);background:rgba(200,169,126,.08);padding:2px 10px;border:1px solid rgba(200,169,126,.2);letter-spacing:.14em}
+.promo-cta{font-size:.5rem;letter-spacing:.18em;text-transform:uppercase;font-weight:700;color:var(--black);background:var(--gold);padding:5px 16px;cursor:pointer;white-space:nowrap;flex-shrink:0;transition:background .25s}
+.promo-cta:hover{background:var(--gold-lt)}
+.promo-x{background:none;border:none;color:rgba(255,255,255,.25);font-size:.78rem;cursor:pointer;padding:2px 6px;flex-shrink:0}
+.promo-x:hover{color:rgba(255,255,255,.6)}
+
+/* ─── NAV ────────────────────────────────────────────────── */
+nav{position:fixed;left:0;right:0;z-index:200;top:0;height:var(--nav-h);display:flex;align-items:center;justify-content:space-between;padding:0 var(--pad);gap:14px;background:rgba(254,254,254,.7);backdrop-filter:blur(28px) saturate(180%);-webkit-backdrop-filter:blur(28px) saturate(180%);border-bottom:1px solid rgba(0,0,0,.05);transition:background .4s,top .4s,box-shadow .4s}
+nav.solid{background:rgba(254,254,254,.94);box-shadow:0 1px 0 rgba(0,0,0,.05),0 4px 24px rgba(0,0,0,.04)}
+.nav-logo{font-family:var(--display);font-size:clamp(.78rem,2.4vw,1.02rem);font-weight:500;letter-spacing:.18em;color:var(--black);white-space:nowrap;flex-shrink:0}
+.nav-logo em{font-style:normal;color:var(--gold)}
+.nav-links{display:none;list-style:none;gap:clamp(16px,2.4vw,36px);align-items:center}
+.nav-links a{font-size:.48rem;letter-spacing:.2em;text-transform:uppercase;color:var(--grey);position:relative;transition:color .25s}
+.nav-links a::after{content:'';position:absolute;bottom:-4px;left:0;right:0;height:1px;background:var(--gold);transform:scaleX(0);transition:transform .35s cubic-bezier(.4,0,.2,1);transform-origin:right}
+.nav-links a:hover{color:var(--black)}
+.nav-links a:hover::after{transform:scaleX(1);transform-origin:left}
+.nav-book{display:none}
+.ham{display:flex;flex-direction:column;gap:5px;width:22px;cursor:pointer;flex-shrink:0;-webkit-tap-highlight-color:transparent}
+.ham span{display:block;height:1.5px;background:var(--black);transition:transform .35s cubic-bezier(.4,0,.2,1),opacity .3s,width .3s}
+.ham span:nth-child(2){width:65%}
+.ham.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg)}
+.ham.open span:nth-child(2){opacity:0;width:0}
+.ham.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg)}
+.mob-menu{position:fixed;inset:0;z-index:199;background:var(--white);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:30px;transform:translateX(100%);transition:transform .5s cubic-bezier(.76,0,.24,1)}
+.mob-menu.open{transform:translateX(0)}
+.mob-menu a{font-family:var(--display);font-size:clamp(1.5rem,6.5vw,2.4rem);font-weight:400;letter-spacing:.06em;color:var(--grey);transition:color .25s}
+.mob-menu a:hover{color:var(--black)}
+.mob-menu-divider{width:1px;height:32px;background:var(--grey-border-lt);display:block;margin:2px auto}
+@media(min-width:860px){.nav-links{display:flex}.nav-book{display:flex}.ham{display:none}}
+
+/* ─── HERO ───────────────────────────────────────────────── */
+.hero{position:relative;min-height:100svh;display:flex;align-items:center;justify-content:center;overflow:hidden;text-align:center}
+.hero-slides{position:absolute;inset:0}
+.hero-slide{position:absolute;inset:0;opacity:0;transition:opacity 1.6s ease}
+.hero-slide.active{opacity:1}
+.hero-slide img{width:100%;height:100%;object-fit:cover;object-position:top center;transform:scale(1.06);transition:transform 8s linear}
+.hero-slide.active img{transform:scale(1)}
+.hero-veil{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(0,0,0,.68) 0%,rgba(0,0,0,.4) 50%,rgba(0,0,0,.72) 100%)}
+.hero-veil-diag{position:absolute;inset:0;background:linear-gradient(135deg,rgba(0,0,0,.25) 0%,transparent 60%)}
+.hero-content{position:relative;z-index:2;padding:calc(var(--nav-h) + 56px) var(--pad) 60px;max-width:720px}
+.hero-eyebrow{display:inline-flex;align-items:center;gap:10px;font-family:var(--sans);font-size:.48rem;letter-spacing:.4em;text-transform:uppercase;color:var(--gold-lt);margin-bottom:22px;opacity:0;animation:heroReveal .9s .3s ease forwards}
+.hero-eyebrow::before,.hero-eyebrow::after{content:'';display:block;width:22px;height:1px;background:var(--gold)}
+.hero h1{font-family:var(--display);font-size:clamp(2.4rem,7.5vw,5.2rem);font-weight:400;line-height:1.04;letter-spacing:.025em;color:var(--white);margin-bottom:6px;opacity:0;animation:heroReveal 1s .55s ease forwards}
+.hero-sub-title{font-family:var(--serif);font-size:clamp(1.2rem,3.5vw,2rem);font-weight:300;font-style:italic;color:rgba(255,255,255,.55);display:block;margin-bottom:20px;opacity:0;animation:heroReveal .9s .75s ease forwards;letter-spacing:.03em}
+.hero-rule{width:48px;height:1px;background:var(--gold);margin:0 auto 22px;opacity:0;animation:heroReveal .8s .9s ease forwards}
+.hero-sub{font-size:clamp(.76rem,1.8vw,.88rem);line-height:1.9;color:rgba(255,255,255,.65);max-width:420px;margin:0 auto 30px;font-weight:300;opacity:0;animation:heroReveal .9s 1s ease forwards;letter-spacing:.02em}
+.hero-btns{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;opacity:0;animation:heroReveal .8s 1.1s ease forwards}
+.hero-stats{display:flex;gap:clamp(28px,6vw,64px);margin-top:40px;justify-content:center;opacity:0;animation:heroReveal .8s 1.3s ease forwards}
+.stat{text-align:center;position:relative}
+.stat+.stat::before{content:'';position:absolute;left:calc(-1 * clamp(14px,3vw,32px));top:50%;transform:translateY(-50%);width:1px;height:32px;background:rgba(255,255,255,.12)}
+.stat-n{font-family:var(--display);font-size:clamp(1.6rem,4.5vw,2.6rem);font-weight:400;color:var(--white);line-height:1}
+.stat-l{font-size:.44rem;letter-spacing:.28em;text-transform:uppercase;color:var(--gold-lt);margin-top:5px;opacity:.7}
+@keyframes heroReveal{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+.hero-dots{position:absolute;bottom:clamp(24px,4vw,44px);left:50%;transform:translateX(-50%);z-index:3;display:flex;gap:10px;align-items:center}
+.hero-dot{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.2);cursor:pointer;transition:all .4s;border:1px solid rgba(255,255,255,.15)}
+.hero-dot.active{background:var(--gold);border-color:var(--gold);box-shadow:0 0 12px rgba(200,169,126,.5)}
+.hero-corner{position:absolute;width:50px;height:50px;pointer-events:none;opacity:.2}
+.hero-corner svg{width:100%;height:100%}
+.hero-corner-tl{top:calc(var(--nav-h) + 16px);left:var(--pad)}
+.hero-corner-tr{top:calc(var(--nav-h) + 16px);right:var(--pad)}
+.hero-corner-bl{bottom:clamp(70px,12vw,100px);left:var(--pad)}
+.hero-corner-br{bottom:clamp(70px,12vw,100px);right:var(--pad)}
+.hero-scroll-indicator{position:absolute;bottom:clamp(18px,3vw,28px);right:var(--pad);z-index:3;display:flex;flex-direction:column;align-items:center;gap:8px;opacity:.4}
+.hero-scroll-line{width:1px;height:40px;background:linear-gradient(to bottom,transparent,var(--gold));animation:scrollPulse 2s ease infinite}
+@keyframes scrollPulse{0%,100%{opacity:.3;transform:scaleY(1)}50%{opacity:.8;transform:scaleY(.8)}}
+
+/* ─── TICKER ──────────────────────────────────────────────── */
+.ticker{background:var(--black);overflow:hidden;padding:13px 0;white-space:nowrap;border-top:1px solid rgba(200,169,126,.1);border-bottom:1px solid rgba(200,169,126,.1)}
+.ticker-track{display:inline-flex;animation:tick 26s linear infinite}
+.ticker-track:hover{animation-play-state:paused}
+.ticker-track span{font-family:var(--serif);font-size:.92rem;letter-spacing:.18em;font-style:italic;font-weight:300;color:rgba(255,255,255,.35);padding:0 22px}
+.ticker-track .sep{color:var(--gold);font-size:.6rem;vertical-align:middle;font-style:normal;font-family:var(--sans)}
+@keyframes tick{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* ─── SECTION ORNAMENT ───────────────────────────────────── */
+.section-intro{text-align:center;margin-bottom:clamp(32px,6vw,56px)}
+
+/* ─── ABOUT ───────────────────────────────────────────────── */
+.about{background:var(--white);padding:clamp(80px,14vw,160px) var(--pad);position:relative;overflow:hidden}
+.about::before{content:'';position:absolute;top:-60px;right:-80px;width:400px;height:400px;border-radius:50%;background:radial-gradient(circle,rgba(200,169,126,.04) 0%,transparent 70%);pointer-events:none}
+.about-inner{display:grid;grid-template-columns:1fr;gap:clamp(40px,8vw,90px);max-width:1100px;margin:0 auto;align-items:center}
+@media(min-width:760px){.about-inner{grid-template-columns:auto 1fr}}
+.about-photo-wrap{position:relative;width:clamp(240px,40vw,360px);margin:0 auto;flex-shrink:0}
+.about-photo{width:100%;aspect-ratio:3/4;object-fit:cover;object-position:top;filter:grayscale(15%) contrast(1.05)}
+.about-frame{position:absolute;top:18px;left:18px;right:-18px;bottom:-18px;border:1px solid var(--gold-lt);pointer-events:none;z-index:-1;transition:transform .4s ease}
+.about-photo-wrap:hover .about-frame{transform:translate(4px,4px)}
+.about-gold-tag{position:absolute;bottom:-12px;right:-12px;background:var(--black);color:var(--gold);font-size:.44rem;letter-spacing:.24em;text-transform:uppercase;padding:8px 16px;border:1px solid rgba(200,169,126,.2);font-family:var(--sans);font-weight:600}
+.about-content{max-width:520px}
+.about-name-line{font-size:.5rem;letter-spacing:.3em;text-transform:uppercase;color:var(--grey-lt);margin-bottom:10px;margin-top:18px;font-family:var(--sans)}
+.about-quote{font-family:var(--serif);font-size:clamp(1rem,2.4vw,1.28rem);font-style:italic;color:var(--black);line-height:1.75;padding-left:22px;border-left:2px solid var(--gold);margin-bottom:26px;margin-top:18px;font-weight:300}
+.about-bio-text{font-size:.8rem;color:var(--grey);line-height:2;margin-bottom:26px;font-weight:300}
+.about-bio-text strong{color:var(--black);font-weight:600}
+.about-creds{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:26px}
+.about-cred{display:flex;align-items:center;gap:7px;background:var(--offwhite);border:1px solid var(--grey-border-lt);padding:8px 14px;font-size:.48rem;letter-spacing:.18em;text-transform:uppercase;color:var(--grey);transition:all .25s}
+.about-cred:hover{border-color:var(--gold);color:var(--black)}
+.about-cred-dot{width:5px;height:5px;background:var(--gold);border-radius:50%;flex-shrink:0}
+.about-social-row{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:28px}
+.about-soc{padding:9px 20px;border:1px solid var(--grey-border-lt);font-size:.48rem;letter-spacing:.18em;text-transform:uppercase;color:var(--grey);transition:all .28s;font-family:var(--sans)}
+.about-soc:hover{border-color:var(--gold);color:var(--black);background:rgba(200,169,126,.04)}
+
+/* ─── NEW CLIENTS ────────────────────────────────────────── */
+.new-clients{background:var(--black);padding:clamp(70px,13vw,130px) var(--pad);color:var(--white);position:relative;overflow:hidden}
+.new-clients::before{content:'FIRST VISIT';position:absolute;right:-20px;top:50%;transform:translateY(-50%) rotate(90deg);font-family:var(--display);font-size:clamp(4rem,10vw,8rem);font-weight:700;color:rgba(255,255,255,.015);letter-spacing:.1em;pointer-events:none;white-space:nowrap}
+.nc-inner{max-width:1100px;margin:0 auto}
+.nc-top{text-align:center;margin-bottom:clamp(40px,7vw,64px)}
+.nc-intro{font-size:.8rem;color:rgba(255,255,255,.35);line-height:1.9;max-width:440px;margin:14px auto 0;font-weight:300}
+.nc-layout{display:grid;grid-template-columns:1fr;gap:clamp(24px,5vw,48px)}
+@media(min-width:760px){.nc-layout{grid-template-columns:1fr 1fr;align-items:start}}
+.nc-image-col{position:relative;overflow:hidden}
+.nc-image-col img{width:100%;aspect-ratio:3/4;object-fit:cover;object-position:top;filter:grayscale(20%);transition:transform .6s cubic-bezier(.4,0,.2,1)}
+.nc-image-col:hover img{transform:scale(1.04)}
+.nc-image-overlay{position:absolute;bottom:0;left:0;right:0;background:linear-gradient(to top,rgba(0,0,0,.88) 0%,transparent 100%);padding:36px 26px 26px}
+.nc-image-overlay h3{font-family:var(--display);font-size:clamp(1.2rem,3vw,1.6rem);color:var(--white);margin-bottom:5px;font-weight:400}
+.nc-image-overlay p{font-size:.54rem;color:var(--gold);letter-spacing:.18em;text-transform:uppercase;font-family:var(--sans)}
+.nc-info-col{display:flex;flex-direction:column;gap:14px}
+.nc-info-box{border:1px solid rgba(255,255,255,.08);padding:clamp(18px,3vw,26px);position:relative;overflow:hidden;transition:border-color .35s,background .35s}
+.nc-info-box::before{content:'';position:absolute;bottom:0;left:0;width:0;height:1px;background:linear-gradient(90deg,var(--gold-dk),var(--gold));transition:width .45s cubic-bezier(.4,0,.2,1)}
+.nc-info-box:hover{border-color:rgba(200,169,126,.2);background:rgba(200,169,126,.025)}
+.nc-info-box:hover::before{width:100%}
+.nc-info-num{font-family:var(--display);font-size:2.8rem;font-weight:700;color:rgba(200,169,126,.06);position:absolute;top:8px;right:14px;line-height:1}
+.nc-info-title{font-family:var(--display);font-size:clamp(.82rem,1.8vw,.98rem);font-weight:500;color:var(--white);margin-bottom:7px;line-height:1.3}
+.nc-info-text{font-size:.74rem;color:rgba(255,255,255,.35);line-height:1.9;font-weight:300}
+.nc-promo-wrap{margin-top:clamp(40px,7vw,64px)}
+.nc-promo{padding:clamp(30px,5vw,52px);position:relative;overflow:hidden;display:grid;grid-template-columns:1fr;gap:32px;max-width:1100px;margin:0 auto;background:var(--white);color:var(--black);box-shadow:0 24px 80px rgba(0,0,0,.25)}
+@media(min-width:700px){.nc-promo{grid-template-columns:1fr 1fr;align-items:center}}
+.nc-promo::after{content:'';position:absolute;top:0;left:0;width:4px;height:100%;background:linear-gradient(to bottom,var(--gold-dk),var(--gold),var(--gold-lt))}
+.nc-promo-label{font-size:.48rem;letter-spacing:.34em;text-transform:uppercase;color:var(--gold);font-weight:600;margin-bottom:12px;font-family:var(--sans)}
+.nc-promo-headline{font-family:var(--display);font-size:clamp(1.8rem,4.5vw,2.8rem);font-weight:400;line-height:1.08;letter-spacing:.02em;margin-bottom:12px;color:var(--black)}
+.nc-promo-headline em{font-style:normal;color:var(--gold)}
+.nc-promo-desc{font-size:.76rem;color:var(--grey);line-height:1.9;font-weight:300}
+.nc-code-box{background:var(--offwhite);border:1.5px dashed var(--gold-lt);padding:16px 20px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:22px;position:relative}
+.nc-code{font-family:var(--display);font-size:clamp(1.4rem,3vw,2rem);color:var(--black);letter-spacing:.12em}
+.nc-code-label{font-size:.44rem;letter-spacing:.2em;text-transform:uppercase;color:var(--grey-lt);margin-top:2px;font-family:var(--sans)}
+.nc-copy-btn{background:transparent;border:1px solid var(--black);color:var(--black);font-size:.44rem;letter-spacing:.2em;text-transform:uppercase;padding:9px 18px;cursor:pointer;transition:all .28s;font-family:var(--sans);font-weight:600;white-space:nowrap}
+.nc-copy-btn:hover{background:var(--black);color:var(--white)}
+.nc-includes{margin-bottom:24px}
+.nc-includes-title{font-size:.44rem;letter-spacing:.26em;text-transform:uppercase;color:var(--grey-lt);margin-bottom:12px;font-family:var(--sans)}
+.nc-include-item{display:flex;align-items:center;gap:10px;font-size:.74rem;color:var(--grey);line-height:1.7;padding:5px 0;font-weight:300}
+.nc-check{color:var(--gold);font-size:.72rem;flex-shrink:0}
+
+/* ─── SERVICES ───────────────────────────────────────────── */
+.services{background:var(--white);padding:clamp(70px,13vw,130px) var(--pad);position:relative;overflow:hidden}
+.svc-inner{max-width:1100px;margin:0 auto}
+.svc-head{text-align:center;margin-bottom:clamp(32px,6vw,52px)}
+.svc-head-sub{font-size:.8rem;color:var(--grey);line-height:1.85;max-width:380px;margin:14px auto 0;font-weight:300}
+.svc-tabs{display:flex;justify-content:center;gap:0;margin-bottom:clamp(32px,6vw,52px);overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;position:relative}
+.svc-tabs::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;background:var(--grey-border-lt)}
+.svc-tabs::-webkit-scrollbar{display:none}
+.svc-tab{padding:18px clamp(20px,4.5vw,44px);font-family:var(--display);font-size:clamp(.7rem,1.7vw,.88rem);font-weight:500;letter-spacing:.07em;color:var(--grey-lt);cursor:pointer;transition:color .3s;position:relative;border:none;background:none;white-space:nowrap;min-height:54px}
+.svc-tab::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--gold-dk),var(--gold));transform:scaleX(0);transition:transform .4s cubic-bezier(.4,0,.2,1);z-index:1}
+.svc-tab:hover{color:var(--black)}
+.svc-tab.active{color:var(--black)}
+.svc-tab.active::after{transform:scaleX(1)}
+.svc-panel{display:none;grid-template-columns:1fr;gap:clamp(28px,6vw,60px);align-items:center;animation:fadeUp .5s ease}
+.svc-panel.active{display:grid}
+@media(min-width:700px){.svc-panel{grid-template-columns:1fr 1fr}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+.svc-panel-img-wrap{position:relative;overflow:hidden}
+.svc-panel-img-wrap::before{content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.15) 0%,transparent 50%);z-index:1;pointer-events:none}
+.svc-panel-img{width:100%;aspect-ratio:3/4;object-fit:cover;object-position:top;filter:grayscale(15%);transition:transform .7s cubic-bezier(.4,0,.2,1)}
+.svc-panel-img-wrap:hover .svc-panel-img{transform:scale(1.04)}
+.svc-panel-num{font-size:.46rem;letter-spacing:.36em;color:var(--gold);font-weight:700;margin-bottom:6px;font-family:var(--sans)}
+.svc-panel-title{font-family:var(--display);font-size:clamp(1.6rem,4.2vw,2.6rem);font-weight:400;color:var(--black);line-height:1.05;letter-spacing:.02em;margin-bottom:12px}
+.svc-panel-price{font-family:var(--serif);font-size:clamp(1.1rem,2.6vw,1.5rem);color:var(--gold-dk);margin-bottom:18px;font-style:italic;font-weight:300}
+.svc-panel-desc{font-size:.8rem;color:var(--grey);line-height:2;margin-bottom:26px;font-weight:300}
+.svc-features{display:flex;flex-direction:column;gap:9px;margin-bottom:30px}
+.svc-feat{display:flex;align-items:center;gap:12px;font-size:.74rem;color:var(--grey);font-weight:300}
+.svc-feat-dot{width:5px;height:5px;background:var(--gold);border-radius:50%;flex-shrink:0}
+
+/* ─── WAITLIST STRIP ─────────────────────────────────────── */
+.wl-strip{background:var(--black2);border-top:1px solid rgba(200,169,126,.08);border-bottom:1px solid rgba(200,169,126,.08);padding:clamp(30px,6vw,48px) var(--pad);display:flex;align-items:center;justify-content:center;gap:clamp(16px,3vw,32px);flex-wrap:wrap;text-align:center;position:relative;overflow:hidden}
+.wl-strip::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 50%,rgba(200,169,126,.03),transparent 65%);pointer-events:none}
+.wl-strip-inner{display:flex;align-items:center;gap:clamp(14px,3.5vw,28px);flex-wrap:wrap;justify-content:center;position:relative;z-index:1}
+.wl-strip-icon{width:40px;height:40px;border:1px solid rgba(200,169,126,.2);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.95rem;flex-shrink:0;color:var(--gold);animation:pulseIcon 2.5s ease infinite}
+@keyframes pulseIcon{0%,100%{box-shadow:0 0 0 0 rgba(200,169,126,.15)}50%{box-shadow:0 0 0 8px rgba(200,169,126,0)}}
+.wl-strip p{font-size:.8rem;color:rgba(255,255,255,.5);font-weight:300}
+.wl-strip p strong{color:var(--white);font-weight:500}
+.wl-strip-btn{display:inline-flex;align-items:center;gap:7px;padding:11px 24px;font-size:.5rem;letter-spacing:.2em;text-transform:uppercase;font-weight:600;background:transparent;border:1px solid var(--gold);color:var(--gold);cursor:pointer;transition:all .3s;font-family:var(--sans)}
+.wl-strip-btn:hover{background:var(--gold);color:var(--black);box-shadow:0 8px 28px rgba(200,169,126,.25)}
+
+/* ─── SPECIALS ───────────────────────────────────────────── */
+.specials{background:var(--offwhite);padding:clamp(70px,13vw,110px) var(--pad);position:relative}
+.specials-inner{max-width:1100px;margin:0 auto}
+.specials-head{text-align:center;margin-bottom:clamp(32px,6vw,52px)}
+.specials-grid{display:grid;gap:20px;grid-template-columns:1fr}
+@media(min-width:560px){.specials-grid{grid-template-columns:repeat(2,1fr)}}
+@media(min-width:900px){.specials-grid{grid-template-columns:repeat(3,1fr)}}
+.deal-card{background:var(--white);border:1px solid var(--grey-border-lt);padding:30px 26px;position:relative;overflow:hidden;transition:border-color .35s,box-shadow .35s,transform .35s}
+.deal-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--gold-dk),var(--gold),var(--gold-lt));transform:scaleX(0);transition:transform .4s cubic-bezier(.4,0,.2,1);transform-origin:left}
+.deal-card:hover{border-color:var(--gold-lt);box-shadow:0 20px 60px rgba(0,0,0,.07),0 4px 16px rgba(200,169,126,.06);transform:translateY(-6px)}
+.deal-card:hover::before{transform:scaleX(1)}
+.deal-badge{display:inline-flex;align-items:center;gap:6px;background:var(--black);color:var(--gold);font-size:.44rem;letter-spacing:.22em;text-transform:uppercase;font-weight:600;padding:5px 13px;margin-bottom:16px;font-family:var(--sans)}
+.deal-title{font-family:var(--display);font-size:clamp(1rem,2.8vw,1.28rem);font-weight:500;color:var(--black);margin-bottom:10px;line-height:1.2}
+.deal-desc{font-size:.74rem;color:var(--grey);line-height:1.85;margin-bottom:18px;font-weight:300}
+.deal-price{display:flex;align-items:baseline;gap:10px;margin-bottom:18px}
+.deal-new{font-family:var(--display);font-size:1.7rem;font-weight:400;color:var(--black)}
+.deal-old{font-size:.76rem;color:var(--grey-lt);text-decoration:line-through}
+.deal-expires{font-size:.48rem;letter-spacing:.16em;color:var(--grey-lt);margin-top:14px;text-transform:uppercase;display:flex;align-items:center;gap:6px;font-family:var(--sans)}
+.deal-expires::before{content:'';display:block;width:10px;height:1px;background:var(--grey-border-lt);flex-shrink:0}
+
+/* ─── GALLERY ────────────────────────────────────────────── */
+.gallery{background:var(--white);padding:clamp(70px,13vw,130px) var(--pad)}
+.gal-inner{max-width:1100px;margin:0 auto}
+.gal-head{text-align:center;margin-bottom:clamp(32px,6vw,52px)}
+.gal-head-sub{font-size:.8rem;color:var(--grey);line-height:1.85;max-width:380px;margin:14px auto 0;font-weight:300}
+.ba-grid{display:grid;gap:24px;grid-template-columns:1fr}
+@media(min-width:600px){.ba-grid{grid-template-columns:repeat(2,1fr)}}
+@media(min-width:1000px){.ba-grid{grid-template-columns:repeat(3,1fr)}}
+.ba-card{position:relative;overflow:hidden;aspect-ratio:3/4;cursor:col-resize;-webkit-tap-highlight-color:transparent;user-select:none}
+.ba-card img{position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;object-position:top;pointer-events:none}
+.ba-img-after{clip-path:inset(0 50% 0 0)}
+.ba-handle{position:absolute;top:0;bottom:0;left:50%;width:2px;background:linear-gradient(to bottom,var(--gold-dk),var(--gold),var(--gold-dk));z-index:3;transform:translateX(-50%);pointer-events:none;box-shadow:0 0 12px rgba(200,169,126,.3)}
+.ba-handle::after{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:34px;height:34px;background:var(--white);border-radius:50%;box-shadow:0 2px 14px rgba(0,0,0,.2);border:1px solid var(--gold-lt)}
+.ba-handle::before{content:'\25C0 \25B6';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:.38rem;color:var(--gold-dk);z-index:4;letter-spacing:1px;white-space:nowrap}
+.ba-label{position:absolute;bottom:14px;z-index:2;font-size:.44rem;letter-spacing:.24em;text-transform:uppercase;font-weight:600;background:rgba(0,0,0,.7);color:var(--white);padding:5px 12px;pointer-events:none;backdrop-filter:blur(8px);font-family:var(--sans)}
+.ba-label-before{left:12px}.ba-label-after{right:12px}
+.gal-extra{margin-top:24px;display:grid;gap:10px;grid-template-columns:repeat(2,1fr)}
+@media(min-width:600px){.gal-extra{grid-template-columns:repeat(4,1fr)}}
+.gal-item{position:relative;overflow:hidden;aspect-ratio:3/4;cursor:pointer}
+.gal-item img{width:100%;height:100%;object-fit:cover;object-position:top;transition:transform .65s cubic-bezier(.4,0,.2,1);filter:grayscale(20%)}
+.gal-item:hover img{transform:scale(1.07);filter:grayscale(0)}
+.gal-veil{position:absolute;inset:0;background:rgba(0,0,0,0);display:flex;align-items:center;justify-content:center;transition:background .4s}
+.gal-item:hover .gal-veil{background:rgba(0,0,0,.25)}
+.gal-plus{font-family:var(--display);font-size:2rem;color:var(--white);opacity:0;transform:scale(.6);transition:opacity .4s,transform .4s}
+.gal-item:hover .gal-plus{opacity:1;transform:scale(1)}
+
+/* ─── CTA BAND ───────────────────────────────────────────── */
+.cta-band{background:var(--black);padding:clamp(60px,12vw,120px) var(--pad);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:28px;text-align:center;position:relative;overflow:hidden}
+.cta-band::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 100%,rgba(200,169,126,.06) 0%,transparent 60%);pointer-events:none}
+.cta-band::after{content:'BOOK NOW';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-family:var(--display);font-size:clamp(6rem,18vw,14rem);font-weight:700;color:rgba(255,255,255,.012);letter-spacing:.04em;pointer-events:none;white-space:nowrap}
+.cta-line{width:36px;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);margin:0 auto}
+.cta-tag{font-size:.46rem;letter-spacing:.42em;text-transform:uppercase;color:var(--gold);position:relative;z-index:1;font-family:var(--sans)}
+.cta-band-content{position:relative;z-index:1;max-width:560px}
+.cta-band h2{font-family:var(--display);font-size:clamp(2.2rem,6.5vw,4rem);color:var(--white);line-height:1.05;letter-spacing:.03em;font-weight:400}
+.cta-band h2 em{font-style:normal;color:var(--gold)}
+.cta-band p{font-size:.8rem;color:rgba(255,255,255,.38);line-height:1.9;margin-top:14px;font-weight:300}
+.cta-band-btn{position:relative;z-index:1;display:flex;gap:14px;flex-wrap:wrap;justify-content:center}
+.cta-bottom-row{display:flex;align-items:center;gap:clamp(18px,4vw,36px);position:relative;z-index:1;flex-wrap:wrap;justify-content:center}
+.cta-mini{display:flex;align-items:center;gap:9px;font-size:.48rem;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.25)}
+.cta-mini::before{content:'';display:block;width:4px;height:4px;background:var(--gold);opacity:.4;border-radius:50%;flex-shrink:0}
+
+/* ─── TESTIMONIALS ───────────────────────────────────────── */
+.testimonials{background:var(--offwhite);padding:clamp(70px,13vw,130px) var(--pad);position:relative;overflow:hidden}
+.testimonials::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--gold-lt),transparent)}
+.test-inner{max-width:820px;margin:0 auto;text-align:center}
+.test-head{margin-bottom:clamp(32px,6vw,52px)}
+.test-carousel{position:relative;overflow:hidden;min-height:300px}
+.test-track{display:flex;transition:transform .6s cubic-bezier(.76,0,.24,1)}
+.t-card{flex:0 0 100%;display:flex;flex-direction:column;align-items:center;padding:0 clamp(12px,5vw,48px)}
+.t-quote-mark{font-family:var(--serif);font-size:6rem;color:var(--gold);opacity:.12;line-height:.5;margin-bottom:10px;font-style:italic}
+.t-stars{color:var(--gold);font-size:.8rem;letter-spacing:5px;margin-bottom:18px}
+.t-text{font-family:var(--serif);font-size:clamp(.96rem,2.4vw,1.2rem);font-style:italic;line-height:1.85;color:var(--grey);margin-bottom:26px;max-width:580px;font-weight:300}
+.t-author{display:flex;align-items:center;gap:14px}
+.t-img{width:46px;height:46px;border-radius:50%;object-fit:cover;object-position:top;border:1px solid var(--gold-lt);flex-shrink:0;filter:grayscale(15%)}
+.t-name{font-size:.78rem;font-weight:600;color:var(--black)}
+.t-role{font-size:.48rem;color:var(--gold);letter-spacing:.2em;text-transform:uppercase;margin-top:3px;font-family:var(--sans)}
+.test-controls{display:flex;align-items:center;gap:12px;justify-content:center;margin-top:32px}
+.t-btn{width:40px;height:40px;border:1px solid var(--grey-border-lt);background:var(--white);color:var(--grey);font-size:.9rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .3s}
+.t-btn:hover,.t-btn.lit{border-color:var(--gold);background:var(--gold);color:var(--white)}
+.t-dots{display:flex;gap:7px;align-items:center;margin:0 8px}
+.t-dot{width:5px;height:5px;border-radius:50%;background:var(--grey-border-lt);transition:background .3s,transform .3s,width .3s;cursor:pointer}
+.t-dot.active{background:var(--gold);transform:scale(1.4)}
+.reviews-cta{display:flex;flex-direction:column;align-items:center;gap:16px;margin-top:clamp(40px,8vw,72px);padding-top:clamp(30px,5vw,50px);border-top:1px solid var(--grey-border-lt)}
+@media(min-width:600px){.reviews-cta{flex-direction:row;justify-content:center;gap:clamp(24px,5vw,56px)}}
+.g-row{display:flex;align-items:center;gap:12px}
+.g-logo{width:38px;height:38px;display:flex;align-items:center;justify-content:center;background:var(--white);border:1px solid var(--grey-border-lt);font-family:var(--sans);font-size:1rem;color:var(--black);font-weight:700;border-radius:50%}
+.g-stars{color:var(--gold);font-size:.72rem;letter-spacing:3px}
+.g-label{font-size:.48rem;letter-spacing:.16em;color:var(--grey-lt);margin-top:3px;text-transform:uppercase;font-family:var(--sans)}
+.review-links{display:flex;gap:8px;flex-wrap:wrap}
+.rev-btn{padding:9px 20px;font-size:.48rem;letter-spacing:.16em;text-transform:uppercase;font-weight:600;border:1px solid var(--grey-border-lt);color:var(--grey);transition:all .28s;font-family:var(--sans)}
+.rev-btn:hover{border-color:var(--gold);color:var(--black)}
+
+/* ─── FAQ ────────────────────────────────────────────────── */
+.faq-section{background:var(--white);padding:clamp(70px,13vw,130px) var(--pad)}
+.faq-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr;gap:clamp(32px,6vw,72px)}
+@media(min-width:760px){.faq-inner{grid-template-columns:1fr 2fr;align-items:start}.faq-left{position:sticky;top:100px}}
+.faq-item{border-bottom:1px solid var(--grey-border-lt);overflow:hidden}
+.faq-q{display:flex;justify-content:space-between;align-items:center;padding:20px 0;cursor:pointer;gap:14px;-webkit-tap-highlight-color:transparent}
+.faq-q-text{font-family:var(--display);font-size:clamp(.8rem,1.9vw,.95rem);font-weight:500;color:var(--black);line-height:1.4;letter-spacing:.01em}
+.faq-icon{width:22px;height:22px;border:1px solid var(--grey-border-lt);display:flex;align-items:center;justify-content:center;flex-shrink:0;color:var(--gold);font-size:.72rem;transition:transform .35s,border-color .3s,background .3s}
+.faq-item.open .faq-icon{transform:rotate(45deg);border-color:var(--gold);background:var(--gold);color:var(--white)}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .45s ease,padding .4s ease}
+.faq-item.open .faq-a{max-height:300px;padding-bottom:20px}
+.faq-a p{font-size:.77rem;color:var(--grey);line-height:1.95;font-weight:300}
+.faq-left-sub{font-size:.8rem;color:var(--grey);line-height:1.9;margin-top:14px;font-weight:300}
+
+/* ─── CONTACT ────────────────────────────────────────────── */
+.contact{background:var(--offwhite);padding:clamp(70px,13vw,130px) var(--pad)}
+.contact-inner{max-width:1100px;margin:0 auto}
+.contact-grid{display:grid;grid-template-columns:1fr;gap:clamp(32px,7vw,72px)}
+@media(min-width:700px){.contact-grid{grid-template-columns:1fr 1fr;align-items:start}}
+.contact-info{margin-top:24px;display:flex;flex-direction:column;gap:14px}
+.c-row{display:flex;align-items:center;gap:14px;font-size:.77rem;color:var(--grey);font-weight:300}
+.c-ico{color:var(--gold);width:28px;text-align:center;font-size:1rem;flex-shrink:0}
+.contact-form{display:flex;flex-direction:column;gap:16px}
+.field{display:flex;flex-direction:column;gap:6px}
+.field label{font-size:.46rem;letter-spacing:.22em;text-transform:uppercase;color:var(--grey);font-family:var(--sans)}
+.field input,.field textarea{width:100%;background:var(--white);border:1px solid var(--grey-border-lt);padding:13px 18px;color:var(--black);font-family:var(--sans);font-size:.8rem;outline:none;transition:border-color .3s,box-shadow .3s;resize:vertical;font-weight:300}
+.field input::placeholder,.field textarea::placeholder{color:#ccc}
+.field input:focus,.field textarea:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(200,169,126,.06)}
+
+/* ─── POLICIES ───────────────────────────────────────────── */
+.policies{background:var(--black);padding:clamp(70px,13vw,120px) var(--pad);color:var(--white)}
+.pol-inner{max-width:1100px;margin:0 auto}
+.pol-layout{display:grid;grid-template-columns:1fr;gap:0}
+@media(min-width:760px){.pol-layout{grid-template-columns:1fr 1fr}}
+.pol-image-side{position:relative;overflow:hidden;min-height:360px}
+.pol-image-side img{width:100%;height:100%;object-fit:cover;object-position:top;filter:grayscale(20%);transition:transform .8s cubic-bezier(.4,0,.2,1)}
+.pol-image-side:hover img{transform:scale(1.04)}
+.pol-image-overlay{position:absolute;inset:0;background:linear-gradient(135deg,rgba(0,0,0,.75) 0%,rgba(0,0,0,.2) 100%);display:flex;flex-direction:column;justify-content:flex-end;padding:clamp(26px,4.5vw,44px)}
+.pol-image-tag{font-size:.46rem;letter-spacing:.36em;text-transform:uppercase;color:var(--gold);margin-bottom:10px;font-family:var(--sans)}
+.pol-image-title{font-family:var(--display);font-size:clamp(1.8rem,4.5vw,2.8rem);font-weight:400;line-height:1.05;letter-spacing:.02em;color:var(--white);margin-bottom:10px}
+.pol-image-title em{font-style:normal;color:var(--gold)}
+.pol-image-sub{font-size:.72rem;color:rgba(255,255,255,.4);line-height:1.75;max-width:280px;font-weight:300}
+.pol-content-side{background:var(--black2);display:flex;flex-direction:column}
+.pol-row{display:flex;gap:clamp(14px,3vw,24px);padding:clamp(18px,3vw,26px) clamp(22px,4vw,38px);border-bottom:1px solid rgba(255,255,255,.04);transition:background .3s,border-color .3s;align-items:flex-start;position:relative}
+.pol-row::before{content:'';position:absolute;left:0;top:0;bottom:0;width:2px;background:linear-gradient(to bottom,var(--gold-dk),var(--gold));opacity:0;transition:opacity .3s}
+.pol-row:last-child{border-bottom:none}
+.pol-row:hover{background:rgba(200,169,126,.02)}
+.pol-row:hover::before{opacity:1}
+.pol-row-num{font-family:var(--display);font-size:clamp(.9rem,2vw,1.15rem);color:rgba(200,169,126,.15);font-weight:700;flex-shrink:0;width:28px;line-height:1.3}
+.pol-row-title{font-family:var(--display);font-size:clamp(.8rem,1.7vw,.93rem);font-weight:500;color:var(--white);margin-bottom:5px;line-height:1.3}
+.pol-row-text{font-size:.7rem;color:rgba(255,255,255,.3);line-height:1.85;font-weight:300}
+.pol-cta{padding:clamp(18px,3vw,26px) clamp(22px,4vw,38px);border-top:1px solid rgba(255,255,255,.04)}
+
+/* ─── FOOTER ─────────────────────────────────────────────── */
+footer{background:var(--black);border-top:1px solid rgba(200,169,126,.08);padding:clamp(52px,11vw,100px) var(--pad) clamp(30px,5vw,52px);color:var(--white)}
+.foot-gold-rule{width:36px;height:1px;background:linear-gradient(90deg,var(--gold-dk),var(--gold));display:block;margin-bottom:18px}
+.foot-grid{display:grid;grid-template-columns:1fr;gap:clamp(32px,5vw,52px);margin-bottom:clamp(36px,6vw,60px)}
+@media(min-width:600px){.foot-grid{grid-template-columns:2fr 1fr 1fr 1fr}}
+.foot-brand{max-width:280px}
+.foot-logo{font-family:var(--display);font-size:clamp(.88rem,2.4vw,1.1rem);font-weight:400;letter-spacing:.18em;display:block;margin-bottom:14px;color:var(--white)}
+.foot-logo em{font-style:normal;color:var(--gold)}
+.foot-desc{font-size:.7rem;color:rgba(255,255,255,.22);line-height:1.9;margin-bottom:20px;font-weight:300}
+.newsletter{display:flex;gap:0;max-width:260px}
+.newsletter input{flex:1;background:rgba(255,255,255,.04);border:1px solid rgba(200,169,126,.12);border-right:none;padding:11px 15px;color:var(--white);font-family:var(--sans);font-size:.7rem;outline:none;min-width:0;transition:border-color .3s;font-weight:300}
+.newsletter input::placeholder{color:rgba(255,255,255,.18)}
+.newsletter input:focus{border-color:rgba(200,169,126,.3)}
+.newsletter button{background:var(--gold);color:var(--black);font-size:.46rem;letter-spacing:.18em;text-transform:uppercase;font-weight:700;padding:11px 16px;cursor:pointer;transition:background .25s;border:1px solid var(--gold);white-space:nowrap;font-family:var(--sans)}
+.newsletter button:hover{background:var(--gold-lt)}
+.foot-col h4{font-family:var(--sans);font-size:.46rem;letter-spacing:.24em;font-weight:600;color:rgba(255,255,255,.3);margin-bottom:16px;text-transform:uppercase}
+.foot-col ul{list-style:none}.foot-col li{margin-bottom:9px}
+.foot-col a{font-size:.7rem;color:rgba(255,255,255,.2);transition:color .25s;font-weight:300}
+.foot-col a:hover{color:var(--gold)}
+.foot-bottom{border-top:1px solid rgba(200,169,126,.06);padding-top:22px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px}
+.foot-copy{font-size:.5rem;color:rgba(255,255,255,.12);letter-spacing:.12em}
+.foot-copy span{color:var(--gold-dk)}
+.socials{display:flex;gap:8px}
+.soc-btn{width:30px;height:30px;display:flex;align-items:center;justify-content:center;border:1px solid rgba(200,169,126,.12);font-size:.48rem;color:rgba(255,255,255,.2);letter-spacing:.06em;transition:all .28s;border-radius:50%}
+.soc-btn:hover{border-color:var(--gold);color:var(--gold)}
+
+/* ─── MODALS ─────────────────────────────────────────────── */
+.email-popup{position:fixed;inset:0;z-index:500;display:flex;align-items:center;justify-content:center;padding:18px;background:rgba(0,0,0,.7);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);opacity:0;visibility:hidden;transition:opacity .45s,visibility .45s;pointer-events:none}
+.email-popup.show{opacity:1;visibility:visible;pointer-events:all}
+.ep-card{width:100%;max-width:468px;background:var(--white);overflow:hidden;box-shadow:0 40px 100px rgba(0,0,0,.35);position:relative;transform:translateY(28px) scale(.96);transition:transform .5s cubic-bezier(.4,0,.2,1)}
+.email-popup.show .ep-card{transform:translateY(0) scale(1)}
+.ep-x{position:absolute;top:12px;right:12px;width:28px;height:28px;border:1px solid var(--grey-border-lt);background:var(--white);color:var(--grey);font-size:.7rem;display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:2;transition:all .25s;border-radius:50%}
+.ep-x:hover{border-color:var(--gold);color:var(--black)}
+.ep-img{position:relative;height:200px;overflow:hidden}
+.ep-img img{width:100%;height:100%;object-fit:cover;object-position:top}
+.ep-img-veil{position:absolute;inset:0;background:linear-gradient(to top,var(--white),transparent 60%)}
+.ep-badge{position:absolute;bottom:14px;left:14px;font-size:.44rem;letter-spacing:.26em;text-transform:uppercase;font-weight:700;background:var(--black);color:var(--gold);padding:5px 14px;font-family:var(--sans)}
+.ep-body{padding:24px}
+.ep-tag{font-size:.46rem;letter-spacing:.34em;text-transform:uppercase;color:var(--gold);font-weight:500;margin-bottom:8px;font-family:var(--sans)}
+.ep-title{font-family:var(--display);font-size:clamp(1.4rem,4vw,1.9rem);font-weight:500;line-height:1.12;margin-bottom:10px;letter-spacing:.02em;color:var(--black)}
+.ep-title em{font-style:normal;color:var(--gold)}
+.ep-desc{font-size:.75rem;line-height:1.85;color:var(--grey);margin-bottom:18px;font-weight:300}
+.ep-form{display:flex;gap:8px;flex-wrap:wrap}
+.ep-input{flex:1;min-width:160px;background:var(--offwhite);border:1px solid var(--grey-border-lt);padding:11px 16px;color:var(--black);font-family:var(--sans);font-size:.76rem;outline:none;transition:border-color .3s,box-shadow .3s;font-weight:300}
+.ep-input::placeholder{color:#ccc}.ep-input:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(200,169,126,.06)}
+.ep-submit{background:var(--black);color:var(--white);border:none;padding:11px 22px;font-size:.5rem;letter-spacing:.18em;text-transform:uppercase;font-weight:600;cursor:pointer;transition:all .3s;font-family:var(--sans)}
+.ep-submit:hover{background:var(--gold-dk)}
+.ep-skip{display:block;text-align:center;margin-top:12px;font-size:.52rem;color:var(--grey-lt);cursor:pointer;letter-spacing:.1em;transition:color .25s;opacity:.45}
+.ep-skip:hover{opacity:.8}
+
+.lightbox{position:fixed;inset:0;z-index:700;background:rgba(0,0,0,.94);display:flex;align-items:center;justify-content:center;opacity:0;visibility:hidden;transition:opacity .38s,visibility .38s;-webkit-tap-highlight-color:transparent}
+.lightbox.open{opacity:1;visibility:visible}
+.lb-close{position:absolute;top:18px;right:18px;width:42px;height:42px;border:1px solid rgba(255,255,255,.12);background:transparent;color:var(--white);font-size:.9rem;cursor:pointer;display:flex;align-items:center;justify-content:center;z-index:2;transition:border-color .25s;border-radius:50%}
+.lb-close:hover{border-color:var(--gold);color:var(--gold)}
+.lb-prev,.lb-next{position:absolute;top:50%;transform:translateY(-50%);width:50px;height:50px;border:1px solid rgba(255,255,255,.12);background:transparent;color:var(--white);font-size:1.7rem;cursor:pointer;display:flex;align-items:center;justify-content:center;z-index:2;transition:all .28s;border-radius:50%}
+.lb-prev{left:16px}.lb-next{right:16px}
+.lb-prev:hover,.lb-next:hover{background:var(--gold);border-color:var(--gold);color:var(--black)}
+.lb-img{max-width:85vw;max-height:85vh;object-fit:contain;box-shadow:0 24px 80px rgba(0,0,0,.4)}
+
+.bm-overlay{position:fixed;inset:0;z-index:800;background:rgba(0,0,0,.7);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);display:flex;align-items:center;justify-content:center;padding:14px;opacity:0;visibility:hidden;transition:opacity .38s,visibility .38s}
+.bm-overlay.open{opacity:1;visibility:visible}
+.bm-panel{width:100%;max-width:520px;max-height:90vh;background:var(--white);display:flex;flex-direction:column;overflow:hidden;box-shadow:0 40px 100px rgba(0,0,0,.35)}
+.bm-header{display:flex;align-items:center;justify-content:space-between;padding:14px 20px;border-bottom:1px solid var(--grey-border-lt);gap:10px;flex-wrap:wrap}
+.bm-header-left{display:flex;align-items:center;gap:9px}
+.bm-dot{width:6px;height:6px;background:var(--gold);border-radius:50%;animation:pulseIcon 2s ease infinite}
+.bm-title{font-family:var(--display);font-size:.72rem;letter-spacing:.1em;color:var(--black)}
+.bm-title em{font-style:normal;color:var(--gold)}
+.bm-svc-tag{font-size:.44rem;letter-spacing:.2em;text-transform:uppercase;color:var(--grey-lt);white-space:nowrap;font-family:var(--sans)}
+.bm-close{width:28px;height:28px;border:1px solid var(--grey-border-lt);background:var(--white);color:var(--grey);font-size:.72rem;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .25s;flex-shrink:0;border-radius:50%}
+.bm-close:hover{border-color:var(--gold);color:var(--black)}
+.bm-body{flex:1;position:relative;min-height:420px}
+.bm-body iframe{width:100%;height:100%;border:none;position:absolute;inset:0}
+.bm-loader{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;background:var(--white)}
+.bm-loader.gone{display:none}
+.bm-spinner{width:28px;height:28px;border:1.5px solid var(--grey-border-lt);border-top-color:var(--gold);border-radius:50%;animation:spin .8s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.bm-loader p{font-size:.58rem;letter-spacing:.16em;color:var(--grey-lt);text-transform:uppercase;font-family:var(--sans)}
+.bm-foot{display:flex;align-items:center;justify-content:center;gap:8px;padding:10px 18px;border-top:1px solid var(--grey-border-lt)}
+.bm-foot span{color:var(--gold-lt);font-size:.6rem;opacity:.35}
+.bm-foot p{font-size:.44rem;color:var(--grey-lt);letter-spacing:.1em;text-align:center;font-family:var(--sans)}
+
+.wl-overlay{position:fixed;inset:0;z-index:600;display:flex;align-items:center;justify-content:center;padding:18px;background:rgba(0,0,0,.7);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);opacity:0;visibility:hidden;transition:opacity .38s,visibility .38s}
+.wl-overlay.open{opacity:1;visibility:visible}
+.wl-panel{width:100%;max-width:472px;background:var(--white);box-shadow:0 40px 100px rgba(0,0,0,.35);padding:34px 28px;position:relative;transform:translateY(24px) scale(.96);transition:transform .5s cubic-bezier(.4,0,.2,1)}
+.wl-overlay.open .wl-panel{transform:translateY(0) scale(1)}
+.wl-panel-top-rule{width:100%;height:2px;background:linear-gradient(90deg,var(--gold-dk),var(--gold),var(--gold-lt));position:absolute;top:0;left:0;right:0}
+.wl-icon{width:48px;height:48px;border:1px solid var(--gold-lt);background:var(--offwhite);display:flex;align-items:center;justify-content:center;font-size:1.2rem;margin-bottom:18px;color:var(--gold)}
+.wl-title{font-family:var(--display);font-size:clamp(1.4rem,4vw,1.9rem);font-weight:500;line-height:1.15;margin-bottom:8px;letter-spacing:.02em;color:var(--black)}
+.wl-title em{font-style:normal;color:var(--gold)}
+.wl-desc{font-size:.76rem;color:var(--grey);line-height:1.85;margin-bottom:22px;font-weight:300}
+.wl-fields{display:flex;flex-direction:column;gap:10px;margin-bottom:14px}
+.wl-input,.wl-select{width:100%;background:var(--offwhite);border:1px solid var(--grey-border-lt);padding:12px 15px;color:var(--black);font-family:var(--sans);font-size:.78rem;outline:none;transition:border-color .3s,box-shadow .3s;font-weight:300}
+.wl-input::placeholder{color:#ccc}.wl-input:focus,.wl-select:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(200,169,126,.06)}
+.wl-select{-webkit-appearance:none;appearance:none;cursor:pointer;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' fill='none'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23C8A97E' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center;padding-right:38px}
+.wl-submit{width:100%;background:var(--black);color:var(--white);border:none;padding:14px;font-size:.54rem;letter-spacing:.2em;text-transform:uppercase;font-weight:600;cursor:pointer;transition:all .3s;font-family:var(--sans)}
+.wl-submit:hover{background:var(--gold-dk)}
+.wl-note{font-size:.5rem;color:var(--grey-lt);text-align:center;margin-top:11px;line-height:1.6;opacity:.5;font-family:var(--sans)}
+.wl-close{position:absolute;top:14px;right:14px;width:26px;height:26px;border:1px solid var(--grey-border-lt);background:var(--white);color:var(--grey);font-size:.72rem;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .25s;border-radius:50%}
+.wl-close:hover{border-color:var(--gold);color:var(--black)}
+
+.float-book{position:fixed;bottom:24px;right:24px;z-index:190;display:flex;align-items:center;justify-content:center;background:var(--black);color:var(--white);border:1px solid rgba(200,169,126,.15);width:46px;height:46px;border-radius:50%;cursor:pointer;box-shadow:0 8px 24px rgba(0,0,0,.3);transition:transform .35s,box-shadow .35s,opacity .45s,border-color .3s;opacity:0;pointer-events:none}
+.float-book.visible{opacity:1;pointer-events:all}
+.float-book:hover{transform:translateY(-4px);box-shadow:0 14px 36px rgba(0,0,0,.4);border-color:var(--gold)}
+
+/* ─── DECORATIVE DIVIDER ─────────────────────────────────── */
+.ornament-divider{display:flex;align-items:center;gap:14px;justify-content:center;padding:clamp(18px,4vw,30px) 0}
+.ornament-divider-line{flex:1;max-width:50px;height:1px;background:var(--grey-border-lt)}
+.ornament-divider-icon{color:var(--gold);font-size:.55rem;opacity:.6}
+.ornament{display:flex;align-items:center;gap:12px;justify-content:center;margin-bottom:16px}
+.ornament-line{width:28px;height:1px;background:var(--gold);opacity:.35}
+.ornament-star{font-size:.52rem;color:var(--gold);opacity:.6}
+
+/* ─── FLOAT ORNAMENTS ────────────────────────────────────── */
+.float-ornament{position:absolute;font-family:var(--display);font-size:clamp(7rem,16vw,13rem);font-weight:700;opacity:.018;pointer-events:none;line-height:1;color:var(--black);user-select:none}
+.float-ornament-w{color:var(--white);opacity:.015}
+</style>
+<script>
+setTimeout(function(){
+  var l=document.getElementById('pageLoader');
+  if(l){l.classList.add('done')}
+},1600);
+</script>
+</head>
+<body>
+
+<!-- GRAIN OVERLAY -->
+<div class="grain" aria-hidden="true">
+  <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
+    <filter id="grain-filter"><feTurbulence type="fractalNoise" baseFrequency="0.75" numOctaves="4" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0"/></filter>
+    <rect width="100%" height="100%" filter="url(#grain-filter)" opacity="1"/>
+  </svg>
+</div>
+
+<!-- CUSTOM CURSOR -->
+<div class="cursor-dot" id="cursorDot"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- PAGE LOADER -->
+<div id="pageLoader">
+  <div class="loader-brand">
+    <div class="loader-logo">Flawless Wig Studio</div>
+    <div class="loader-sub">Luxury Hair Experience</div>
+  </div>
+  <div class="loader-bar-wrap"><div class="loader-bar"></div></div>
+</div>
+
+<!-- PROMO BANNER -->
+<div class="promo-banner" id="promoBanner">
+  <p class="promo-text">&#x2726; Limited Time — <strong>FLAWLESS10</strong> — 10% off your first install &#x2726;</p>
+  <span class="promo-cta" id="promoCta">Book Now</span>
+  <button class="promo-x" id="promoX">&#x2715;</button>
+</div>
+
+<!-- WAITLIST OVERLAY -->
+<div class="wl-overlay" id="wlOverlay">
+  <div class="wl-panel">
+    <div class="wl-panel-top-rule"></div>
+    <button class="wl-close" id="wlClose">&#x2715;</button>
+    <div class="wl-icon">&#x23F0;</div>
+    <h2 class="wl-title">Join the<br><em>Waitlist</em></h2>
+    <p class="wl-desc">We're fully booked right now — but spots open often! Leave your info and we'll reach out the moment something opens up.</p>
+    <div class="wl-fields">
+      <input class="wl-input" type="text" id="wlName" placeholder="Your name">
+      <input class="wl-input" type="email" id="wlEmail" placeholder="Email address">
+      <input class="wl-input" type="tel" id="wlPhone" placeholder="Phone number (optional)">
+      <select class="wl-select" id="wlService">
+        <option value="" disabled selected>Which service are you interested in?</option>
+        <option>Frontal Wig Install — $170</option>
+        <option>Closure Install — $150</option>
+        <option>Wig Revamp — $190</option>
+        <option>Custom Styling</option>
+        <option>Any available</option>
+      </select>
+    </div>
+    <button class="wl-submit" id="wlSubmit"><span>Join Waitlist</span></button>
+    <p class="wl-note">We'll notify you as soon as a spot opens. No spam, ever.</p>
+  </div>
+</div>
+
+<!-- EMAIL POPUP -->
+<div class="email-popup" id="emailPopup">
+  <div class="ep-card">
+    <button class="ep-x" id="epX">&#x2715;</button>
+    <div class="ep-img">
+      <img src="img2.jpeg" alt="Flawless install">
+      <div class="ep-img-veil"></div>
+      <div class="ep-badge">Members Only</div>
+    </div>
+    <div class="ep-body" id="epBody">
+      <div class="ep-tag">Join the VIP List</div>
+      <h2 class="ep-title">Get <em>10% Off</em><br>Your First Install</h2>
+      <p class="ep-desc">Sign up for exclusive early booking access, VIP offers, and style inspo straight to your inbox.</p>
+      <div class="ep-form">
+        <input class="ep-input" type="email" id="epEmail" placeholder="Enter your email...">
+        <button class="ep-submit" id="epSubmit"><span>Claim Offer</span></button>
+      </div>
+      <span class="ep-skip" id="epSkip">No thanks, I'll pay full price</span>
+    </div>
+  </div>
+</div>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lb">
+  <button class="lb-close" id="lbClose">&#x2715;</button>
+  <button class="lb-prev" id="lbPrev">&#8249;</button>
+  <img class="lb-img" id="lbImg" src="" alt="">
+  <button class="lb-next" id="lbNext">&#8250;</button>
+</div>
+
+<!-- BOOKING MODAL -->
+<div class="bm-overlay" id="bmOverlay">
+  <div class="bm-panel">
+    <div class="bm-header">
+      <div class="bm-header-left"><div class="bm-dot"></div><span class="bm-title">Flawless <em>Wig</em> Studio</span></div>
+      <span class="bm-svc-tag" id="bmSvcTag">Book Appointment</span>
+      <button class="bm-close" id="bmClose">&#x2715;</button>
+    </div>
+    <div class="bm-body">
+      <div class="bm-loader" id="bmLoader"><div class="bm-spinner"></div><p>Loading your booking...</p></div>
+      <iframe id="bmFrame" src="" title="Book an appointment" allow="payment"></iframe>
+    </div>
+    <div class="bm-foot">
+      <span>&#x2726;</span>
+      <p>Secured booking &middot; $25 deposit required &middot; Powered by Acuity Scheduling</p>
+      <span>&#x2726;</span>
+    </div>
+  </div>
+</div>
+
+<!-- FLOAT UP BUTTON -->
+<button class="float-book" id="floatTop" aria-label="Back to top">
+  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"/></svg>
+</button>
+
+<!-- MOB MENU -->
+<div class="mob-menu" id="mobMenu">
+  <a href="#about" class="mm-l">About</a>
+  <div class="mob-menu-divider"></div>
+  <a href="#services" class="mm-l">Services</a>
+  <div class="mob-menu-divider"></div>
+  <a href="#new-clients" class="mm-l">New Clients</a>
+  <div class="mob-menu-divider"></div>
+  <a href="#gallery" class="mm-l">Gallery</a>
+  <div class="mob-menu-divider"></div>
+  <a href="#testimonials" class="mm-l">Reviews</a>
+  <div class="mob-menu-divider"></div>
+  <a href="#faq" class="mm-l">FAQ</a>
+  <div class="mob-menu-divider"></div>
+  <a href="#contact" class="mm-l">Contact</a>
+  <button class="btn btn-gold" id="mobBookBtn" style="margin-top:8px"><span>Book Now</span></button>
+</div>
+
+<!-- NAV -->
+<nav id="nav">
+  <div class="nav-logo">Flawless <em>Wig</em> Studio</div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#new-clients">New Clients</a></li>
+    <li><a href="#gallery">Gallery</a></li>
+    <li><a href="#testimonials">Reviews</a></li>
+    <li><a href="#faq">FAQ</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <button class="btn btn-b nav-book" id="navBook" style="padding:9px 20px;font-size:.48rem;"><span>Book Now</span></button>
+  <div class="ham" id="ham"><span></span><span></span><span></span></div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-slides">
+    <div class="hero-slide active"><img src="img4.jpeg" alt="Flawless install"><div class="hero-veil"></div><div class="hero-veil-diag"></div></div>
+    <div class="hero-slide"><img src="img8.jpeg" alt="Wig styling"><div class="hero-veil"></div><div class="hero-veil-diag"></div></div>
+    <div class="hero-slide"><img src="img1.jpeg" alt="Custom wig install"><div class="hero-veil"></div><div class="hero-veil-diag"></div></div>
+    <div class="hero-slide"><img src="img3.jpeg" alt="Lace melt"><div class="hero-veil"></div><div class="hero-veil-diag"></div></div>
+  </div>
+  <!-- Corner brackets -->
+  <div class="hero-corner hero-corner-tl"><svg viewBox="0 0 50 50" fill="none" stroke="white" stroke-width="1"><polyline points="50,0 0,0 0,50"/></svg></div>
+  <div class="hero-corner hero-corner-tr"><svg viewBox="0 0 50 50" fill="none" stroke="white" stroke-width="1"><polyline points="0,0 50,0 50,50"/></svg></div>
+  <div class="hero-corner hero-corner-bl"><svg viewBox="0 0 50 50" fill="none" stroke="white" stroke-width="1"><polyline points="0,0 0,50 50,50"/></svg></div>
+  <div class="hero-corner hero-corner-br"><svg viewBox="0 0 50 50" fill="none" stroke="white" stroke-width="1"><polyline points="50,0 50,50 0,50"/></svg></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">Premium Wig Studio</div>
+    <h1>Flawless Wig Installs</h1>
+    <span class="hero-sub-title">Laid to Perfection</span>
+    <div class="hero-rule"></div>
+    <p class="hero-sub">Custom wig installs, seamless lace melts, and secure natural finishes. Every client leaves looking and feeling their absolute best.</p>
+    <div class="hero-btns">
+      <button class="btn btn-w" id="heroBook"><span>Book Appointment</span></button>
+      <a href="#gallery" class="btn btn-ow"><span>View Gallery</span></a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat"><div class="stat-n" data-count="500">0</div><div class="stat-l">Happy Clients</div></div>
+      <div class="stat"><div class="stat-n">5&#9733;</div><div class="stat-l">Avg. Rating</div></div>
+      <div class="stat"><div class="stat-n">4 Yrs</div><div class="stat-l">Experience</div></div>
+    </div>
+  </div>
+  <div class="hero-dots" id="heroDots"></div>
+  <div class="hero-scroll-indicator" aria-hidden="true"><div class="hero-scroll-line"></div></div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker" aria-hidden="true">
+  <div class="ticker-track">
+    <span>Frontal Wig Install</span><span class="sep">&#x2726;</span>
+    <span>Lace Melt</span><span class="sep">&#x2726;</span>
+    <span>Closure Install</span><span class="sep">&#x2726;</span>
+    <span>Wig Revamp</span><span class="sep">&#x2726;</span>
+    <span>Custom Styling</span><span class="sep">&#x2726;</span>
+    <span>Body Wave</span><span class="sep">&#x2726;</span>
+    <span>Silk Press</span><span class="sep">&#x2726;</span>
+    <span>Frontal Wig Install</span><span class="sep">&#x2726;</span>
+    <span>Lace Melt</span><span class="sep">&#x2726;</span>
+    <span>Closure Install</span><span class="sep">&#x2726;</span>
+    <span>Wig Revamp</span><span class="sep">&#x2726;</span>
+    <span>Custom Styling</span><span class="sep">&#x2726;</span>
+    <span>Body Wave</span><span class="sep">&#x2726;</span>
+    <span>Silk Press</span><span class="sep">&#x2726;</span>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="float-ornament" style="top:-15px;right:var(--pad)" aria-hidden="true">F</div>
+  <div class="about-inner">
+    <div class="about-photo-wrap reveal-left">
+      <img class="about-photo" src="img5.jpeg" alt="Stylist">
+      <div class="about-frame"></div>
+      <div class="about-gold-tag">Lead Stylist</div>
+    </div>
+    <div class="about-content">
+      <div class="reveal stagger-1"><div class="tag">Meet Your Stylist</div></div>
+      <div class="reveal stagger-2"><h2 class="display">The Art of<br><em>Flawless</em></h2></div>
+      <div class="reveal stagger-3">
+        <div class="about-name-line">Founder &amp; Lead Stylist</div>
+        <p class="about-quote">"I started this studio because I believe every woman deserves to feel effortlessly beautiful — and I've made it my mission to deliver exactly that, every single time."</p>
+        <p class="about-bio-text">Hey, I'm the face behind <strong>Flawless Wig Studio</strong>. What started as a passion for hair transformed into a full-time craft — and I haven't looked back since. I specialize in <strong>undetectable lace melts</strong>, custom styling, and secure installs that last.</p>
+      </div>
+      <div class="reveal stagger-4">
+        <div class="about-creds">
+          <span class="about-cred"><span class="about-cred-dot"></span>5+ Years Experience</span>
+          <span class="about-cred"><span class="about-cred-dot"></span>500+ Installs</span>
+          <span class="about-cred"><span class="about-cred-dot"></span>5.0 ★ Google</span>
+          <span class="about-cred"><span class="about-cred-dot"></span>Licensed Stylist</span>
+        </div>
+        <div class="about-social-row">
+          <a href="#" class="about-soc">Instagram</a>
+          <a href="#" class="about-soc">TikTok</a>
+          <a href="#" class="about-soc">Facebook</a>
+        </div>
+        <button class="btn btn-b" onclick="scrollToServices()"><span>Book With Me</span></button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- NEW CLIENTS -->
+<section class="new-clients" id="new-clients">
+  <div class="nc-inner">
+    <div class="nc-top reveal">
+      <div class="ornament" style="color:rgba(200,169,126,.3)"><span class="ornament-line"></span><span class="ornament-star">&#x2726;</span><span class="ornament-line"></span></div>
+      <div class="tag tag-w" style="justify-content:center">First Visit?</div>
+      <h2 class="display display-w" style="margin-top:8px">Welcome, <em>New Client</em></h2>
+      <p class="nc-intro">Everything you need to know before your first appointment.</p>
+    </div>
+    <div class="nc-layout">
+      <div class="nc-image-col reveal-left">
+        <img src="img6.jpeg" alt="New client">
+        <div class="nc-image-overlay">
+          <h3>Your First Visit</h3>
+          <p>What to expect at the studio</p>
+        </div>
+      </div>
+      <div class="nc-info-col reveal-right">
+        <div class="nc-info-box stagger-1">
+          <div class="nc-info-num">01</div>
+          <div class="nc-info-title">What to Expect</div>
+          <p class="nc-info-text">Quick consultation about your hair goals, then I handle everything — lace prep, adhesive, styling. You just relax.</p>
+        </div>
+        <div class="nc-info-box stagger-2">
+          <div class="nc-info-num">02</div>
+          <div class="nc-info-title">Come With Clean Hair</div>
+          <p class="nc-info-text">Arrive with your natural hair freshly washed, blown out, and laid flat. No braids, twists, or product buildup.</p>
+        </div>
+        <div class="nc-info-box stagger-3">
+          <div class="nc-info-num">03</div>
+          <div class="nc-info-title">Have Your Wig Ready</div>
+          <p class="nc-info-text">Bring your wig pre-plucked if possible — but don't stress if not, I can customize the hairline for you.</p>
+        </div>
+        <div class="nc-info-box stagger-4">
+          <div class="nc-info-num">04</div>
+          <div class="nc-info-title">Plan Your Time</div>
+          <p class="nc-info-text">A typical install takes 2–3 hours. Come fed, relaxed, and ready to be transformed.</p>
+        </div>
+      </div>
+    </div>
+    <div class="nc-promo-wrap reveal">
+      <div class="nc-promo">
+        <div>
+          <div class="nc-promo-label">New Client Exclusive</div>
+          <h3 class="nc-promo-headline">10% Off Your<br><em>First Install</em></h3>
+          <p class="nc-promo-desc">First-time clients get 10% off any wig install. Use the code when booking, or mention it at your appointment.</p>
+        </div>
+        <div>
+          <div class="nc-code-box">
+            <div>
+              <div class="nc-code">FLAWLESS10</div>
+              <div class="nc-code-label">Promo code — first install only</div>
+            </div>
+            <button class="nc-copy-btn" onclick="navigator.clipboard.writeText('FLAWLESS10').then(function(){ this.textContent='Copied!'; var b=this; setTimeout(function(){ b.textContent='Copy'; },2000); }.bind(this))">Copy</button>
+          </div>
+          <div class="nc-includes">
+            <div class="nc-includes-title">What's Included</div>
+            <div class="nc-include-item"><span class="nc-check">&#x2713;</span>Full lace melt &amp; adhesive application</div>
+            <div class="nc-include-item"><span class="nc-check">&#x2713;</span>Hairline customization &amp; baby hair styling</div>
+            <div class="nc-include-item"><span class="nc-check">&#x2713;</span>Style &amp; finish to your preference</div>
+            <div class="nc-include-item"><span class="nc-check">&#x2713;</span>Aftercare tips to protect your install</div>
+          </div>
+          <button class="btn btn-b" onclick="scrollToServices()" style="width:100%;justify-content:center;"><span>Book Your First Appointment &#x2197;</span></button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="services" id="services">
+  <div class="float-ornament" style="bottom:-15px;left:var(--pad)" aria-hidden="true">S</div>
+  <div class="svc-inner">
+    <div class="svc-head reveal">
+      <div class="ornament"><span class="ornament-line"></span><span class="ornament-star">&#x2726;</span><span class="ornament-line"></span></div>
+      <div class="tag" style="justify-content:center">What We Offer</div>
+      <h2 class="display" style="margin-top:8px">Wig &amp; Install <em>Services</em></h2>
+      <p class="svc-head-sub">From seamless lace melts to full wig revamps — every service tailored perfectly to you.</p>
+    </div>
+    <div class="svc-tabs reveal">
+      <button class="svc-tab active" data-tab="0">Frontal Install</button>
+      <button class="svc-tab" data-tab="1">Closure Install</button>
+      <button class="svc-tab" data-tab="2">Wig Revamp</button>
+    </div>
+    <div class="svc-panel active" data-panel="0">
+      <div class="svc-panel-img-wrap"><img class="svc-panel-img" src="img1.jpeg" alt="Frontal"></div>
+      <div class="svc-panel-body">
+        <div class="svc-panel-num">01 — Service</div>
+        <h3 class="svc-panel-title">Frontal Wig Install</h3>
+        <div class="svc-panel-price">Starting at $170</div>
+        <p class="svc-panel-desc">Our signature full frontal install gives you a flawless, undetectable hairline with ear-to-ear coverage. Perfect for versatile styling — wear it up, down, or slicked back with confidence.</p>
+        <div class="svc-features">
+          <div class="svc-feat"><span class="svc-feat-dot"></span>Seamless lace melt &amp; adhesive application</div>
+          <div class="svc-feat"><span class="svc-feat-dot"></span>Custom hairline shaping &amp; baby hair work</div>
+          <div class="svc-feat"><span class="svc-feat-dot"></span>Full style &amp; finish included</div>
+          <div class="svc-feat"><span class="svc-feat-dot"></span>2–3 hour appointment time</div>
+        </div>
+        <button class="btn btn-b" id="svcBtn1"><span>Book This Service &#x2197;</span></button>
+      </div>
+    </div>
+    <div class="svc-panel" data-panel="1">
+      <div class="svc-panel-img-wrap"><img class="svc-panel-img" src="img6.jpeg" alt="Closure"></div>
+      <div class="svc-panel-body">
+        <div class="svc-panel-num">02 — Service</div>
+        <h3 class="svc-panel-title">Closure Install</h3>
+        <div class="svc-panel-price">Starting at $150</div>
+        <p class="svc-panel-desc">A more natural, low-maintenance option. The closure sits at the crown for a clean, realistic-looking part. Ideal for clients who want a polished look without a full frontal.</p>
+        <div class="svc-features">
+          <div class="svc-feat"><span class="svc-feat-dot"></span>4x4 or 5x5 closure application</div>
+          <div class="svc-feat"><span class="svc-feat-dot"></span>Lace melt &amp; secure adhesive</div>
+          <div class="svc-feat"><span class="svc-feat-dot"></span>Natural part styling</div>
+          <div class="svc-feat"><span class="svc-feat-dot"></span>1.5–2.5 hour appointment time</div>
+        </div>
+        <button class="btn btn-b" id="svcBtn2"><span>Book This Service &#x2197;</span></button>
+      </div>
+    </div>
+    <div class="svc-panel" data-panel="2">
+      <div class="svc-panel-img-wrap"><img class="svc-panel-img" src="img7.jpeg" alt="Revamp"></div>
+      <div class="svc-panel-body">
+        <div class="svc-panel-num">03 — Service</div>
+        <h3 class="svc-panel-title">Wig Revamp</h3>
+        <div class="svc-panel-price">Starting at $190</div>
+        <p class="svc-panel-desc">Breathe new life into your existing wig. We'll wash, condition, restyle, and re-install it so it looks and feels brand new. Perfect for extending the life of your investment.</p>
+        <div class="svc-features">
+          <div class="svc-feat"><span class="svc-feat-dot"></span>Deep wash &amp; condition treatment</div>
+          <div class="svc-feat"><span class="svc-feat-dot"></span>Restyle, cut &amp; reshape</div>
+          <div class="svc-feat"><span class="svc-feat-dot"></span>Fresh lace melt &amp; reinstall</div>
+          <div class="svc-feat"><span class="svc-feat-dot"></span>2–3 hour appointment time</div>
+        </div>
+        <button class="btn btn-b" id="svcBtn3"><span>Book This Service &#x2197;</span></button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WAITLIST STRIP -->
+<div class="wl-strip">
+  <div class="wl-strip-inner">
+    <div class="wl-strip-icon">&#x23F0;</div>
+    <p><strong>Fully booked?</strong> Don't worry — join the waitlist and we'll notify you the moment a slot opens.</p>
+    <button class="wl-strip-btn" id="wlTrigger"><span>Join the Waitlist &#x2197;</span></button>
+  </div>
+</div>
+
+<!-- SPECIALS -->
+<section class="specials" id="specials">
+  <div class="specials-inner">
+    <div class="specials-head reveal">
+      <div class="ornament"><span class="ornament-line"></span><span class="ornament-star">&#x2726;</span><span class="ornament-line"></span></div>
+      <div class="tag" style="justify-content:center">Limited Deals</div>
+      <h2 class="display" style="margin-top:8px">Current <em>Promotions</em></h2>
+    </div>
+    <div class="specials-grid">
+      <div class="deal-card reveal stagger-1">
+        <div class="deal-badge">&#x2726; New Clients</div>
+        <div class="deal-title">New Client Special</div>
+        <p class="deal-desc">First-time clients get an exclusive discount on any frontal or closure install.</p>
+        <div class="deal-price"><span class="deal-new">$145</span><span class="deal-old">$170</span></div>
+        <button class="btn btn-b" id="dealBtn1" style="padding:9px 20px;font-size:.5rem;"><span>Book This Deal</span></button>
+        <p class="deal-expires">Offer expires March 31, 2026</p>
+      </div>
+      <div class="deal-card reveal stagger-2">
+        <div class="deal-badge">&#x2726; Bundle &amp; Save</div>
+        <div class="deal-title">Install + Revamp Bundle</div>
+        <p class="deal-desc">Book a fresh install and a wig revamp together and save $40.</p>
+        <div class="deal-price"><span class="deal-new">$320</span><span class="deal-old">$360</span></div>
+        <button class="btn btn-b" id="dealBtn2" style="padding:9px 20px;font-size:.5rem;"><span>Book This Deal</span></button>
+        <p class="deal-expires">While slots last</p>
+      </div>
+      <div class="deal-card reveal stagger-3">
+        <div class="deal-badge">&#x2726; Refer a Friend</div>
+        <div class="deal-title">Referral Discount</div>
+        <p class="deal-desc">Refer a friend who books an install and you both get $20 off your next appointment.</p>
+        <div class="deal-price"><span class="deal-new">$20 off</span></div>
+        <button class="btn btn-b" id="dealBtn3" style="padding:9px 20px;font-size:.5rem;"><span>Claim Referral</span></button>
+        <p class="deal-expires">Ongoing promotion</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section class="gallery" id="gallery">
+  <div class="gal-inner">
+    <div class="gal-head reveal">
+      <div class="ornament"><span class="ornament-line"></span><span class="ornament-star">&#x2726;</span><span class="ornament-line"></span></div>
+      <div class="tag" style="justify-content:center">Portfolio</div>
+      <h2 class="display" style="margin-top:8px">Our <em>Gallery</em></h2>
+      <p class="gal-head-sub">Drag the sliders to compare different styles &amp; transformations.</p>
+    </div>
+    <div class="ba-grid">
+      <div class="ba-card reveal stagger-1"><img class="ba-img-before" src="img2.jpeg" alt="A"><img class="ba-img-after" src="img3.jpeg" alt="B"><div class="ba-handle"></div><span class="ba-label ba-label-before">Style A</span><span class="ba-label ba-label-after">Style B</span></div>
+      <div class="ba-card reveal stagger-2"><img class="ba-img-before" src="img5.jpeg" alt="A"><img class="ba-img-after" src="img9.jpeg" alt="B"><div class="ba-handle"></div><span class="ba-label ba-label-before">Style A</span><span class="ba-label ba-label-after">Style B</span></div>
+      <div class="ba-card reveal stagger-3"><img class="ba-img-before" src="img8.jpeg" alt="A"><img class="ba-img-after" src="img10.jpeg" alt="B"><div class="ba-handle"></div><span class="ba-label ba-label-before">Style A</span><span class="ba-label ba-label-after">Style B</span></div>
+    </div>
+    <div class="gal-extra">
+      <div class="gal-item reveal stagger-1" data-src="img1.jpeg"><img src="img1.jpeg" alt="G"><div class="gal-veil"><span class="gal-plus">+</span></div></div>
+      <div class="gal-item reveal stagger-2" data-src="img11.png"><img src="img11.png" alt="G"><div class="gal-veil"><span class="gal-plus">+</span></div></div>
+      <div class="gal-item reveal stagger-3" data-src="img13.png"><img src="img13.png" alt="G"><div class="gal-veil"><span class="gal-plus">+</span></div></div>
+      <div class="gal-item reveal stagger-4" data-src="img12.png"><img src="img12.png" alt="G"><div class="gal-veil"><span class="gal-plus">+</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA BAND -->
+<div class="cta-band">
+  <div class="cta-tag reveal">&#x2726; Ready to Glow? &#x2726;</div>
+  <div class="cta-line"></div>
+  <div class="cta-band-content reveal">
+    <h2>Let's Get You<br><em>Booked</em></h2>
+    <p>Secure your appointment today and experience seamless lace melts, custom styling, and long-lasting results you'll obsess over.</p>
+  </div>
+  <div class="cta-band-btn reveal">
+    <button class="btn btn-gold" id="ctaBook" style="padding:16px 40px;"><span>Book Appointment</span></button>
+    <a href="#services" class="btn btn-ow"><span>View Services</span></a>
+  </div>
+  <div class="cta-bottom-row reveal">
+    <div class="cta-mini">$25 Deposit</div>
+    <div class="cta-mini">Same-Week Availability</div>
+    <div class="cta-mini">5-Star Rated</div>
+  </div>
+</div>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials" id="testimonials">
+  <div class="test-inner">
+    <div class="test-head reveal">
+      <div class="ornament"><span class="ornament-line"></span><span class="ornament-star">&#x2726;</span><span class="ornament-line"></span></div>
+      <div class="tag" style="justify-content:center">Client Love</div>
+      <h2 class="display" style="margin-top:8px">What Our <em>Clients Say</em></h2>
+    </div>
+    <div class="test-carousel reveal">
+      <div class="test-track" id="tTrack">
+        <div class="t-card"><div class="t-quote-mark">&ldquo;</div><div class="t-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div><p class="t-text">"I've had my fair share of wig installs, but this experience was on a completely different level. My lace was perfectly melted — the hairline looked completely natural, and the fit was so secure yet comfortable."</p><div class="t-author"><img class="t-img" src="img8.jpeg" alt="S"><div><div class="t-name">Sarah M.</div><div class="t-role">Custom Wig Styling</div></div></div></div>
+        <div class="t-card"><div class="t-quote-mark">&ldquo;</div><div class="t-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div><p class="t-text">"Best wig install I've ever had! She literally transformed my whole look. The lace was undetectable and everyone thought it was my real hair. I've already booked my next appointment!"</p><div class="t-author"><img class="t-img" src="img3.jpeg" alt="J"><div><div class="t-name">Jasmine T.</div><div class="t-role">Frontal Install</div></div></div></div>
+        <div class="t-card"><div class="t-quote-mark">&ldquo;</div><div class="t-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div><p class="t-text">"I came in for a wig revamp and left looking like a whole new woman. She breathed new life into my old wig — styled it, cut it, and installed it flawlessly. The attention to detail is unmatched."</p><div class="t-author"><img class="t-img" src="img5.jpeg" alt="D"><div><div class="t-name">Destiny R.</div><div class="t-role">Wig Revamp</div></div></div></div>
+        <div class="t-card"><div class="t-quote-mark">&ldquo;</div><div class="t-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div><p class="t-text">"She did my closure install and I am OBSESSED. My lace laid so naturally, I almost cried. The vibe in the studio is so welcoming and she really takes her time to make sure everything is perfect. 10/10!"</p><div class="t-author"><img class="t-img" src="img2.jpeg" alt="K"><div><div class="t-name">Kezia B.</div><div class="t-role">Closure Install</div></div></div></div>
+      </div>
+    </div>
+    <div class="test-controls">
+      <button class="t-btn" id="tPrev">&#8592;</button>
+      <div class="t-dots" id="tDots"></div>
+      <button class="t-btn lit" id="tNext">&#8594;</button>
+    </div>
+    <div class="reviews-cta reveal">
+      <div class="g-row">
+        <div class="g-logo">G</div>
+        <div><div class="g-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div><div class="g-label">5.0 &middot; 47 Google Reviews</div></div>
+      </div>
+      <div class="review-links">
+        <a class="rev-btn" href="#">&#128279; Read Reviews</a>
+        <a class="rev-btn" href="#">&#9733; Leave a Review</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq-section" id="faq">
+  <div class="faq-inner">
+    <div class="faq-left reveal-left">
+      <div class="tag">Got Questions?</div>
+      <h2 class="display" style="margin-top:8px">Frequently<br><em>Asked</em></h2>
+      <p class="faq-left-sub">Everything you need to know before booking your first appointment.</p>
+    </div>
+    <div class="faq-list reveal" id="faqList">
+      <div class="faq-item"><div class="faq-q"><span class="faq-q-text">How long does a wig install take?</span><span class="faq-icon">+</span></div><div class="faq-a"><p>Most installs take between 1.5 to 3 hours depending on the style and technique. Lace melts and detailed baby hair work may take a bit longer.</p></div></div>
+      <div class="faq-item"><div class="faq-q"><span class="faq-q-text">Do I need to bring my own wig?</span><span class="faq-icon">+</span></div><div class="faq-a"><p>Yes! We install your wig — we don't supply one. Please arrive with a clean, pre-plucked, and pre-bleached wig ready to go.</p></div></div>
+      <div class="faq-item"><div class="faq-q"><span class="faq-q-text">What's the difference between a frontal and closure?</span><span class="faq-icon">+</span></div><div class="faq-a"><p>A frontal runs ear to ear giving more styling versatility. A closure is smaller (usually 4x4 or 5x5) and sits in the middle — great for natural-looking parts.</p></div></div>
+      <div class="faq-item"><div class="faq-q"><span class="faq-q-text">How long will my install last?</span><span class="faq-icon">+</span></div><div class="faq-a"><p>With proper care, an install typically lasts 2–4 weeks. We recommend sleeping with a satin bonnet and avoiding excess moisture at the roots.</p></div></div>
+      <div class="faq-item"><div class="faq-q"><span class="faq-q-text">Is a deposit required to book?</span><span class="faq-icon">+</span></div><div class="faq-a"><p>Yes — a $25 non-refundable deposit is required to secure your appointment. Cancellations must be made at least 24 hours in advance.</p></div></div>
+      <div class="faq-item"><div class="faq-q"><span class="faq-q-text">Can I get my wig styled the same day?</span><span class="faq-icon">+</span></div><div class="faq-a"><p>Absolutely! Just let us know when booking so we can schedule enough time. We do cuts, curls, flat iron, and more.</p></div></div>
+      <div class="faq-item"><div class="faq-q"><span class="faq-q-text">What if I need to reschedule?</span><span class="faq-icon">+</span></div><div class="faq-a"><p>You can reschedule up to 24 hours before your appointment at no charge. Use the link in your confirmation email or contact us directly.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="contact-inner">
+    <div class="contact-grid">
+      <div class="reveal-left">
+        <div class="tag">Get In Touch</div>
+        <h2 class="display" style="margin-top:8px">Contact <em>Us</em></h2>
+        <p style="font-size:.77rem;line-height:1.9;color:var(--grey);margin-top:14px;font-weight:300">Have a question? We'd love to hear from you.</p>
+        <div class="contact-info">
+          <div class="c-row"><div class="c-ico">&#9993;</div><a href="mailto:hello@flawlesswigstudio.com">hello@flawlesswigstudio.com</a></div>
+          <div class="c-row"><div class="c-ico">&#9742;</div>(877) 297-5454</div>
+          <div class="c-row"><div class="c-ico">&#9679;</div>6391 Elgin Celina, Delaware</div>
+        </div>
+      </div>
+      <div class="contact-form reveal-right">
+        <div class="field"><label>Your Name</label><input type="text" placeholder="e.g. Jasmine Smith" autocomplete="name"></div>
+        <div class="field"><label>Email</label><input type="email" placeholder="you@email.com" autocomplete="email"></div>
+        <div class="field"><label>Your Question</label><textarea placeholder="What would you like to know?" style="min-height:140px"></textarea></div>
+        <button class="btn btn-b" style="align-self:flex-start;"><span>Send Message</span></button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- POLICIES -->
+<section class="policies" id="policies">
+  <div class="pol-inner">
+    <div class="pol-layout">
+      <div class="pol-image-side reveal-left">
+        <img src="img9.jpeg" alt="Studio">
+        <div class="pol-image-overlay">
+          <div class="pol-image-tag">Before You Come In</div>
+          <h2 class="pol-image-title">Studio<br><em>Policies</em></h2>
+          <p class="pol-image-sub">Please review these guidelines before your appointment so we can make the most of your time together.</p>
+        </div>
+      </div>
+      <div class="pol-content-side reveal-right">
+        <div class="pol-row"><div class="pol-row-num">01</div><div class="pol-row-body"><div class="pol-row-title">Book in Advance</div><p class="pol-row-text">All appointments must be booked at least 24 hours in advance to secure your spot.</p></div></div>
+        <div class="pol-row"><div class="pol-row-num">02</div><div class="pol-row-body"><div class="pol-row-title">$25 Non-Refundable Deposit</div><p class="pol-row-text">A deposit is required at booking to confirm. This goes toward your total service cost.</p></div></div>
+        <div class="pol-row"><div class="pol-row-num">03</div><div class="pol-row-body"><div class="pol-row-title">10-Minute Grace Period</div><p class="pol-row-text">Arriving later may result in a shortened service or your appointment being rescheduled.</p></div></div>
+        <div class="pol-row"><div class="pol-row-num">04</div><div class="pol-row-body"><div class="pol-row-title">24-Hour Cancellation</div><p class="pol-row-text">Cancel or reschedule at least 24 hours in advance to avoid a cancellation fee.</p></div></div>
+        <div class="pol-row"><div class="pol-row-num">05</div><div class="pol-row-body"><div class="pol-row-title">Bring Inspiration Photos</div><p class="pol-row-text">Come with reference photos ready so we can create your perfect look together.</p></div></div>
+        <div class="pol-row"><div class="pol-row-num">06</div><div class="pol-row-body"><div class="pol-row-title">No Extra Guests</div><p class="pol-row-text">To keep the studio calm and focused, no extra guests unless previously approved.</p></div></div>
+        <div class="pol-cta"><button class="btn btn-b" id="polBook" style="width:100%;justify-content:center;"><span>Book Now</span></button></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="foot-grid">
+    <div class="foot-brand">
+      <span class="foot-logo">Flawless <em>Wig</em> Studio</span>
+      <div class="foot-gold-rule"></div>
+      <p class="foot-desc">Book your flawless install today and step out with confidence. Where Beauty Meets Precision.</p>
+      <div class="newsletter">
+        <input type="email" id="footerEmail" placeholder="Your email...">
+        <button id="footerSubscribe">Subscribe</button>
+      </div>
+    </div>
+    <div class="foot-col">
+      <h4>Pages</h4>
+      <ul>
+        <li><a href="#">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#new-clients">New Clients</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#gallery">Gallery</a></li>
+        <li><a href="#faq">FAQ</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+    <div class="foot-col">
+      <h4>Info</h4>
+      <ul>
+        <li><a href="#">Terms &amp; Conditions</a></li>
+        <li><a href="#">Payment Methods</a></li>
+        <li><a href="#">Policies</a></li>
+        <li><a href="#">Returns</a></li>
+      </ul>
+    </div>
+    <div class="foot-col">
+      <h4>Social</h4>
+      <ul>
+        <li><a href="#">Instagram</a></li>
+        <li><a href="#">TikTok</a></li>
+        <li><a href="#">Facebook</a></li>
+        <li><a href="#">YouTube</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="foot-bottom">
+    <span class="foot-copy">&copy; 2026 <span>Flawless Wig Studio</span>. All rights reserved.</span>
+    <div class="socials">
+      <a href="#" class="soc-btn">ig</a>
+      <a href="#" class="soc-btn">tk</a>
+      <a href="#" class="soc-btn">fb</a>
+      <a href="#" class="soc-btn">yt</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+/* ─── CURSOR ─────────────────────────── */
+var dot=document.getElementById('cursorDot'),ring=document.getElementById('cursorRing');
+var mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',function(e){
+  mx=e.clientX; my=e.clientY;
+  dot.style.left=mx+'px'; dot.style.top=my+'px';
+});
+(function animate(){
+  rx+=(mx-rx)*.12; ry+=(my-ry)*.12;
+  ring.style.left=rx+'px'; ring.style.top=ry+'px';
+  requestAnimationFrame(animate);
+})();
+document.querySelectorAll('a,button,.gal-item,.ba-card,.deal-card,.nc-info-box,.about-cred,.about-soc,.svc-tab,.faq-q').forEach(function(el){
+  el.addEventListener('mouseenter',function(){document.body.classList.add('cursor-hover')});
+  el.addEventListener('mouseleave',function(){document.body.classList.remove('cursor-hover')});
+});
+
+/* ─── SCROLL REVEAL ──────────────────── */
+var revealEls=document.querySelectorAll('.reveal,.reveal-left,.reveal-right');
+var io=new IntersectionObserver(function(entries){
+  entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add('visible')}});
+},{threshold:.12,rootMargin:'0px 0px -40px 0px'});
+revealEls.forEach(function(el){io.observe(el)});
+
+/* ─── HERO SLIDES ────────────────────── */
+var heroSlides=document.querySelectorAll('.hero-slide'),heroDots=document.getElementById('heroDots'),hCur=0,hAuto;
+heroSlides.forEach(function(_,i){
+  var d=document.createElement('span');
+  d.className='hero-dot'+(i===0?' active':'');
+  d.addEventListener('click',function(){heroTo(i);resetHeroAuto()});
+  heroDots.appendChild(d);
+});
+function heroTo(n){
+  heroSlides[hCur].classList.remove('active');
+  heroDots.children[hCur].classList.remove('active');
+  hCur=n%heroSlides.length;
+  heroSlides[hCur].classList.add('active');
+  heroDots.children[hCur].classList.add('active');
+}
+function startHeroAuto(){hAuto=setInterval(function(){heroTo(hCur+1)},5000)}
+function resetHeroAuto(){clearInterval(hAuto);startHeroAuto()}
+startHeroAuto();
+
+/* ─── ANIMATED COUNTER ───────────────── */
+var counted=false;
+var statsSection=document.querySelector('.hero-stats');
+if(statsSection){
+  var cio=new IntersectionObserver(function(entries){
+    if(entries[0].isIntersecting&&!counted){
+      counted=true;
+      var el=document.querySelector('[data-count]');
+      if(el){
+        var target=parseInt(el.getAttribute('data-count')),start=0,dur=1800,step=dur/target;
+        var timer=setInterval(function(){
+          start+=Math.ceil(target/60);
+          if(start>=target){start=target;clearInterval(timer)}
+          el.textContent=start+'+';
+        },step);
+      }
+    }
+  },{threshold:.5});
+  cio.observe(statsSection);
+}
+
+/* ─── EMAIL POPUP ────────────────────── */
+var emailPopup=document.getElementById('emailPopup');
+function hideEmailPopup(){emailPopup.classList.remove('show');document.body.style.overflow='';sessionStorage.setItem('ep_done','1')}
+document.getElementById('epX').addEventListener('click',hideEmailPopup);
+document.getElementById('epSkip').addEventListener('click',hideEmailPopup);
+emailPopup.addEventListener('click',function(e){if(e.target===emailPopup)hideEmailPopup()});
+if(!sessionStorage.getItem('ep_done')){setTimeout(function(){emailPopup.classList.add('show');document.body.style.overflow='hidden'},5000)}
+
+function subscribeToFlodesk(email,ok,err){
+  fetch('/.netlify/functions/subscribe',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email:email})})
+  .then(function(r){if(r.ok||r.status===200||r.status===201)ok();else err()}).catch(function(){err()});
+}
+document.getElementById('epSubmit').addEventListener('click',function(){
+  var em=document.getElementById('epEmail').value.trim();
+  if(!em||!em.includes('@')){document.getElementById('epEmail').style.borderColor='var(--gold)';return}
+  subscribeToFlodesk(em,
+    function(){document.getElementById('epBody').innerHTML='<div style="text-align:center;padding:22px 0"><div style="font-size:2.4rem;margin-bottom:12px;color:var(--gold)">&#10003;</div><div style="font-family:Cinzel,serif;font-size:1.45rem;font-weight:400;margin-bottom:10px">You\'re on the list!</div><p style="font-size:.76rem;color:var(--grey);line-height:1.85">Your 10% code is on its way to <strong>'+em+'</strong>.</p><button onclick="hideEmailPopup()" style="margin-top:20px;display:inline-flex;padding:11px 26px;font-size:.52rem;letter-spacing:.18em;text-transform:uppercase;font-weight:600;background:var(--black);color:#fff;border:none;cursor:pointer;font-family:Jost,sans-serif">Continue</button></div>';setTimeout(hideEmailPopup,4500)},
+    function(){document.getElementById('epBody').innerHTML='<div style="text-align:center;padding:22px 0"><div style="font-size:2.4rem;margin-bottom:12px">&#x26A0;</div><p style="font-size:.76rem;color:var(--grey);line-height:1.85">Something went wrong.</p><button onclick="hideEmailPopup()" style="margin-top:20px;display:inline-flex;padding:11px 26px;font-size:.52rem;letter-spacing:.18em;text-transform:uppercase;font-weight:600;background:#ddd;color:var(--black);border:none;cursor:pointer;font-family:Jost,sans-serif">Close</button></div>'}
+  );
+});
+
+/* ─── FOOTER SUBSCRIBE ───────────────── */
+document.getElementById('footerSubscribe').addEventListener('click',function(){
+  var em=document.getElementById('footerEmail').value.trim(),btn=document.getElementById('footerSubscribe');
+  if(!em||!em.includes('@')){document.getElementById('footerEmail').style.borderColor='rgba(200,169,126,.5)';return}
+  btn.textContent='...';
+  subscribeToFlodesk(em,
+    function(){btn.textContent='\u2713 Done!';document.getElementById('footerEmail').value='';setTimeout(function(){btn.textContent='Subscribe'},3000)},
+    function(){btn.textContent='Retry';setTimeout(function(){btn.textContent='Subscribe'},3000)}
+  );
+});
+
+/* ─── FLOAT TOP ──────────────────────── */
+var floatTop=document.getElementById('floatTop');
+window.addEventListener('scroll',function(){floatTop.classList.toggle('visible',window.scrollY>400)},{ passive:true });
+floatTop.addEventListener('click',function(){window.scrollTo({top:0,behavior:'smooth'})});
+
+/* ─── PROMO BANNER + NAV ─────────────── */
+var promoBanner=document.getElementById('promoBanner'),navEl=document.getElementById('nav');
+function setNavTop(){var bh=promoBanner.classList.contains('hidden')?0:promoBanner.offsetHeight;navEl.style.top=bh+'px'}
+setNavTop();
+window.addEventListener('resize',setNavTop,{passive:true});
+document.getElementById('promoX').addEventListener('click',function(){promoBanner.classList.add('hidden');setTimeout(setNavTop,420)});
+document.getElementById('promoCta').addEventListener('click',function(){scrollToServices()});
+
+/* ─── WAITLIST ───────────────────────── */
+var wlOverlay=document.getElementById('wlOverlay');
+function openWaitlist(){wlOverlay.classList.add('open');document.body.style.overflow='hidden'}
+function closeWaitlist(){wlOverlay.classList.remove('open');document.body.style.overflow=''}
+document.getElementById('wlClose').addEventListener('click',closeWaitlist);
+wlOverlay.addEventListener('click',function(e){if(e.target===wlOverlay)closeWaitlist()});
+document.getElementById('wlTrigger').addEventListener('click',openWaitlist);
+document.getElementById('wlSubmit').addEventListener('click',function(){
+  var name=document.getElementById('wlName').value.trim(),em=document.getElementById('wlEmail').value.trim(),phone=document.getElementById('wlPhone').value.trim(),service=document.getElementById('wlService').value,date=new Date().toLocaleDateString('en-US',{year:'numeric',month:'short',day:'numeric',hour:'2-digit',minute:'2-digit'});
+  if(!name){document.getElementById('wlName').style.borderColor='var(--gold)';return}
+  if(!em||!em.includes('@')){document.getElementById('wlEmail').style.borderColor='var(--gold)';return}
+  var fd=new FormData();fd.append('name',name);fd.append('email',em);fd.append('phone',phone);fd.append('service',service);fd.append('date',date);
+  fetch('https://formspree.io/f/mkovapzo',{method:'POST',body:fd,headers:{'Accept':'application/json'}}).then(function(r){console.log('Formspree:',r.status)}).catch(function(e){console.warn(e)});
+  document.querySelector('.wl-panel').innerHTML='<div class="wl-panel-top-rule"></div><div style="text-align:center;padding:32px 22px"><div style="font-size:2.8rem;margin-bottom:16px;color:var(--gold)">&#10003;</div><div style="font-family:Cinzel,serif;font-size:1.65rem;font-weight:400;margin-bottom:12px;letter-spacing:.03em">You\'re on the waitlist!</div><p style="font-size:.76rem;color:var(--grey);line-height:1.9;max-width:290px;margin:0 auto">Hi <strong>'+name+'</strong> — we\'ll reach out to <strong>'+em+'</strong> the moment a spot opens.</p><button onclick="closeWaitlist()" style="margin-top:24px;display:inline-flex;padding:12px 28px;font-size:.52rem;letter-spacing:.18em;text-transform:uppercase;font-weight:600;background:var(--black);color:#fff;border:none;cursor:pointer;font-family:Jost,sans-serif">Close</button></div>';
+});
+
+/* ─── BOOKING ────────────────────────── */
+var ACUITY='https://acuityscheduling.com/schedule.php?owner=33887867',bmOverlay=document.getElementById('bmOverlay'),bmFrame=document.getElementById('bmFrame'),bmLoader=document.getElementById('bmLoader'),bmSvcTag=document.getElementById('bmSvcTag');
+function openBooking(svc){
+  bmSvcTag.textContent=(svc&&svc!=='General')?svc:'Book Appointment';
+  var url=(svc&&svc!=='General')?ACUITY+'&appointmentType='+encodeURIComponent(svc):ACUITY;
+  bmLoader.classList.remove('gone');bmFrame.src='';bmOverlay.classList.add('open');document.body.style.overflow='hidden';
+  setTimeout(function(){bmFrame.src=url},100);
+  bmFrame.onload=function(){bmLoader.classList.add('gone')};
+}
+function closeBooking(){bmOverlay.classList.remove('open');document.body.style.overflow='';setTimeout(function(){bmFrame.src=''},400)}
+document.getElementById('bmClose').addEventListener('click',closeBooking);
+bmOverlay.addEventListener('click',function(e){if(e.target===bmOverlay)closeBooking()});
+function scrollToServices(){var el=document.getElementById('services');if(el)el.scrollIntoView({behavior:'smooth'})}
+['navBook','mobBookBtn','heroBook','ctaBook','polBook'].forEach(function(id){
+  var el=document.getElementById(id);if(!el)return;
+  el.addEventListener('click',function(e){
+    e.stopPropagation();
+    if(id==='mobBookBtn'){document.getElementById('mobMenu').classList.remove('open');document.getElementById('ham').classList.remove('open');document.body.style.overflow=''}
+    scrollToServices();
+  });
+});
+var dealMap={dealBtn1:'Frontal Wig Install',dealBtn2:'Frontal Wig Install',dealBtn3:'General'};
+Object.keys(dealMap).forEach(function(id){var el=document.getElementById(id);if(el)el.addEventListener('click',function(e){e.stopPropagation();openBooking(dealMap[id])})});
+var svcBtnMap={svcBtn1:'Frontal Wig Install',svcBtn2:'Closure Install',svcBtn3:'Wig Revamp'};
+Object.keys(svcBtnMap).forEach(function(id){var el=document.getElementById(id);if(el)el.addEventListener('click',function(e){e.stopPropagation();openBooking(svcBtnMap[id])})});
+document.addEventListener('keydown',function(e){if(e.key==='Escape'){closeBooking();closeWaitlist()}});
+
+/* ─── NAV + HAMBURGER ────────────────── */
+window.addEventListener('scroll',function(){navEl.classList.toggle('solid',window.scrollY>50)},{passive:true});
+var ham=document.getElementById('ham'),mobMenu=document.getElementById('mobMenu');
+ham.addEventListener('click',function(){ham.classList.toggle('open');mobMenu.classList.toggle('open');document.body.style.overflow=mobMenu.classList.contains('open')?'hidden':''});
+document.querySelectorAll('.mm-l').forEach(function(a){a.addEventListener('click',function(){ham.classList.remove('open');mobMenu.classList.remove('open');document.body.style.overflow=''})});
+
+/* ─── SERVICE TABS ───────────────────── */
+document.querySelectorAll('.svc-tab').forEach(function(tab){
+  tab.addEventListener('click',function(){
+    document.querySelectorAll('.svc-tab').forEach(function(t){t.classList.remove('active')});
+    document.querySelectorAll('.svc-panel').forEach(function(p){p.classList.remove('active')});
+    tab.classList.add('active');
+    document.querySelector('.svc-panel[data-panel="'+tab.dataset.tab+'"]').classList.add('active');
+  });
+});
+
+/* ─── FAQ ────────────────────────────── */
+document.querySelectorAll('.faq-item').forEach(function(item){
+  item.querySelector('.faq-q').addEventListener('click',function(){
+    var wasOpen=item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(function(i){i.classList.remove('open')});
+    if(!wasOpen)item.classList.add('open');
+  });
+});
+
+/* ─── TESTIMONIAL CAROUSEL ───────────── */
+var tTrack=document.getElementById('tTrack'),tDotsEl=document.getElementById('tDots'),tCur=0,tAutoTimer,tCards=tTrack.children.length;
+for(var i=0;i<tCards;i++){
+  var d=document.createElement('span');d.className='t-dot'+(i===0?' active':'');d.dataset.i=i;
+  (function(idx){d.addEventListener('click',function(){tSlideTo(idx);resetTAuto()})})(i);
+  tDotsEl.appendChild(d);
+}
+function tSlideTo(n){
+  var max=tCards-1;tCur=Math.max(0,Math.min(n,max));
+  var w=tTrack.children[0].offsetWidth;
+  tTrack.style.transform='translateX(-'+(tCur*w)+'px)';
+  tDotsEl.querySelectorAll('.t-dot').forEach(function(d,idx){d.classList.toggle('active',idx===tCur)});
+}
+function startTAuto(){tAutoTimer=setInterval(function(){tSlideTo(tCur>=tCards-1?0:tCur+1)},4800)}
+function stopTAuto(){clearInterval(tAutoTimer)}
+function resetTAuto(){stopTAuto();startTAuto()}
+document.getElementById('tNext').addEventListener('click',function(){tSlideTo(tCur+1);resetTAuto()});
+document.getElementById('tPrev').addEventListener('click',function(){tSlideTo(tCur-1);resetTAuto()});
+tTrack.addEventListener('mouseenter',stopTAuto);tTrack.addEventListener('mouseleave',startTAuto);
+var tTs=0;
+tTrack.addEventListener('touchstart',function(e){tTs=e.touches[0].clientX;stopTAuto()},{passive:true});
+tTrack.addEventListener('touchend',function(e){var dx=tTs-e.changedTouches[0].clientX;if(Math.abs(dx)>40)tSlideTo(dx>0?tCur+1:tCur-1);resetTAuto()});
+startTAuto();
+
+/* ─── BEFORE/AFTER SLIDERS ───────────── */
+document.querySelectorAll('.ba-card').forEach(function(card){
+  var handle=card.querySelector('.ba-handle'),afterImg=card.querySelector('.ba-img-after'),isDragging=false;
+  function updateSlider(x){var rect=card.getBoundingClientRect(),pct=Math.max(0,Math.min(1,(x-rect.left)/rect.width));handle.style.left=(pct*100)+'%';afterImg.style.clipPath='inset(0 '+((1-pct)*100)+'% 0 0)'}
+  card.addEventListener('mousedown',function(e){isDragging=true;updateSlider(e.clientX);e.preventDefault()});
+  document.addEventListener('mousemove',function(e){if(isDragging)updateSlider(e.clientX)});
+  document.addEventListener('mouseup',function(){isDragging=false});
+  card.addEventListener('touchstart',function(e){isDragging=true;updateSlider(e.touches[0].clientX)},{passive:true});
+  card.addEventListener('touchmove',function(e){if(isDragging)updateSlider(e.touches[0].clientX)},{passive:true});
+  card.addEventListener('touchend',function(){isDragging=false});
+});
+
+/* ─── LIGHTBOX ───────────────────────── */
+var lb=document.getElementById('lb'),lbImg=document.getElementById('lbImg'),galItems=Array.from(document.querySelectorAll('.gal-item')),lbIndex=0;
+function openLb(idx){lbIndex=idx;lbImg.src=galItems[lbIndex].dataset.src;lb.classList.add('open');document.body.style.overflow='hidden'}
+function closeLb(){lb.classList.remove('open');document.body.style.overflow=''}
+function lbNav(dir){lbIndex=(lbIndex+dir+galItems.length)%galItems.length;lbImg.style.opacity='0';setTimeout(function(){lbImg.src=galItems[lbIndex].dataset.src;lbImg.style.opacity='1'},180)}
+lbImg.style.transition='opacity .2s';
+galItems.forEach(function(item,i){item.addEventListener('click',function(){openLb(i)})});
+document.getElementById('lbClose').addEventListener('click',closeLb);
+document.getElementById('lbPrev').addEventListener('click',function(e){e.stopPropagation();lbNav(-1)});
+document.getElementById('lbNext').addEventListener('click',function(e){e.stopPropagation();lbNav(1)});
+lb.addEventListener('click',function(e){if(e.target===lb)closeLb()});
+})();
+</script>
+</body>
+</html>
