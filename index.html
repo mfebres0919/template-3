@@ -294,16 +294,53 @@ nav.solid{background:rgba(254,254,254,.94);box-shadow:0 1px 0 rgba(0,0,0,.05),0 
 .svc-feat{display:flex;align-items:center;gap:12px;font-size:.74rem;color:var(--grey);font-weight:300}
 .svc-feat-dot{width:5px;height:5px;background:var(--gold);border-radius:50%;flex-shrink:0}
 
-/* ─── WAITLIST STRIP ─────────────────────────────────────── */
-.wl-strip{background:var(--black2);border-top:1px solid rgba(200,169,126,.08);border-bottom:1px solid rgba(200,169,126,.08);padding:clamp(30px,6vw,48px) var(--pad);display:flex;align-items:center;justify-content:center;gap:clamp(16px,3vw,32px);flex-wrap:wrap;text-align:center;position:relative;overflow:hidden}
-.wl-strip::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 50%,rgba(200,169,126,.03),transparent 65%);pointer-events:none}
-.wl-strip-inner{display:flex;align-items:center;gap:clamp(14px,3.5vw,28px);flex-wrap:wrap;justify-content:center;position:relative;z-index:1}
-.wl-strip-icon{width:40px;height:40px;border:1px solid rgba(200,169,126,.2);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.95rem;flex-shrink:0;color:var(--gold);animation:pulseIcon 2.5s ease infinite}
 @keyframes pulseIcon{0%,100%{box-shadow:0 0 0 0 rgba(200,169,126,.15)}50%{box-shadow:0 0 0 8px rgba(200,169,126,0)}}
-.wl-strip p{font-size:.8rem;color:rgba(255,255,255,.5);font-weight:300}
-.wl-strip p strong{color:var(--white);font-weight:500}
-.wl-strip-btn{display:inline-flex;align-items:center;gap:7px;padding:11px 24px;font-size:.5rem;letter-spacing:.2em;text-transform:uppercase;font-weight:600;background:transparent;border:1px solid var(--gold);color:var(--gold);cursor:pointer;transition:all .3s;font-family:var(--sans)}
-.wl-strip-btn:hover{background:var(--gold);color:var(--black);box-shadow:0 8px 28px rgba(200,169,126,.25)}
+
+/* ─── WAITLIST SECTION ───────────────────────────────────── */
+.wl-section{position:relative;overflow:hidden;background:var(--black)}
+.wl-section-grid{display:grid;grid-template-columns:1fr;min-height:clamp(420px,60vw,620px)}
+@media(min-width:760px){.wl-section-grid{grid-template-columns:1fr 1fr}}
+/* Image side */
+.wl-img-side{position:relative;overflow:hidden;min-height:300px}
+.wl-img-side img{width:100%;height:100%;object-fit:cover;object-position:top center;filter:grayscale(18%) brightness(.88);transition:transform 8s linear;transform:scale(1.06)}
+.wl-section:hover .wl-img-side img{transform:scale(1)}
+.wl-img-overlay{position:absolute;inset:0;background:linear-gradient(to right,transparent 60%,var(--black) 100%),linear-gradient(to top,rgba(0,0,0,.55) 0%,transparent 50%)}
+@media(max-width:759px){.wl-img-overlay{background:linear-gradient(to bottom,transparent 40%,var(--black) 100%)}}
+.wl-img-caption{position:absolute;bottom:clamp(20px,4vw,36px);left:clamp(20px,4vw,40px);z-index:2}
+.wl-img-caption-tag{font-family:var(--sans);font-size:.44rem;letter-spacing:.34em;text-transform:uppercase;color:var(--gold);font-weight:600;margin-bottom:6px}
+.wl-img-caption-text{font-family:var(--serif);font-size:clamp(1rem,2.5vw,1.3rem);color:rgba(255,255,255,.6);font-style:italic;font-weight:300;line-height:1.4}
+/* Content side */
+.wl-content-side{display:flex;flex-direction:column;justify-content:center;padding:clamp(48px,8vw,90px) clamp(28px,6vw,72px);position:relative;z-index:2}
+.wl-content-side::before{content:'WAITLIST';position:absolute;bottom:-10px;right:-10px;font-family:var(--display);font-size:clamp(5rem,12vw,9rem);font-weight:700;color:rgba(255,255,255,.018);letter-spacing:.06em;pointer-events:none;line-height:1;white-space:nowrap}
+.wl-eyebrow{display:inline-flex;align-items:center;gap:10px;font-family:var(--sans);font-size:.46rem;letter-spacing:.38em;text-transform:uppercase;color:var(--gold);font-weight:600;margin-bottom:18px}
+.wl-eyebrow::before{content:'';display:block;width:22px;height:1px;background:var(--gold);flex-shrink:0}
+.wl-heading{font-family:var(--display);font-size:clamp(1.9rem,4.5vw,3rem);font-weight:400;line-height:1.08;letter-spacing:.03em;color:var(--white);margin-bottom:10px}
+.wl-heading em{font-style:normal;color:var(--gold)}
+.wl-subheading{font-family:var(--serif);font-size:clamp(1rem,2.2vw,1.3rem);font-style:italic;color:rgba(255,255,255,.35);font-weight:300;line-height:1.5;margin-bottom:20px}
+.wl-rule{width:36px;height:1px;background:linear-gradient(90deg,var(--gold-dk),var(--gold));margin-bottom:22px}
+.wl-desc{font-size:.78rem;color:rgba(255,255,255,.4);line-height:1.95;font-weight:300;max-width:360px;margin-bottom:32px}
+.wl-desc strong{color:rgba(255,255,255,.75);font-weight:500}
+/* Availability pills */
+.wl-avail{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:32px}
+.wl-avail-pill{display:flex;align-items:center;gap:7px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);padding:8px 14px;font-size:.46rem;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.35);font-family:var(--sans)}
+.wl-avail-pill-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0}
+.wl-avail-pill.open .wl-avail-pill-dot{background:var(--gold);box-shadow:0 0 6px rgba(200,169,126,.5)}
+.wl-avail-pill.limited .wl-avail-pill-dot{background:#d4a056;box-shadow:0 0 6px rgba(212,160,86,.4)}
+.wl-avail-pill.full .wl-avail-pill-dot{background:rgba(255,255,255,.2)}
+/* CTA row */
+.wl-cta-row{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.wl-btn{display:inline-flex;align-items:center;gap:9px;padding:14px 30px;font-family:var(--sans);font-size:.52rem;letter-spacing:.2em;text-transform:uppercase;font-weight:700;cursor:pointer;transition:all .35s;position:relative;overflow:hidden;border:none}
+.wl-btn-primary{background:linear-gradient(135deg,var(--gold-dk),var(--gold));color:var(--black)}
+.wl-btn-primary::before{content:'';position:absolute;inset:0;background:var(--gold-lt);transform:translateX(-105%);transition:transform .4s cubic-bezier(.4,0,.2,1)}
+.wl-btn-primary:hover::before{transform:translateX(0)}
+.wl-btn-primary span{position:relative;z-index:1}
+.wl-btn-primary:hover{box-shadow:0 12px 40px rgba(200,169,126,.3),0 4px 12px rgba(200,169,126,.15)}
+.wl-note-inline{font-size:.56rem;color:rgba(255,255,255,.22);letter-spacing:.08em;display:flex;align-items:center;gap:7px}
+.wl-note-inline::before{content:'';display:block;width:18px;height:1px;background:rgba(255,255,255,.12);flex-shrink:0}
+/* Spots counter badge */
+.wl-spots-badge{position:absolute;top:clamp(16px,3vw,28px);right:clamp(16px,3vw,28px);background:rgba(0,0,0,.6);border:1px solid rgba(200,169,126,.2);backdrop-filter:blur(12px);padding:12px 18px;text-align:center;z-index:3}
+.wl-spots-num{font-family:var(--display);font-size:1.6rem;font-weight:500;color:var(--gold);line-height:1;display:block}
+.wl-spots-label{font-size:.42rem;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.35);font-family:var(--sans);display:block;margin-top:3px}
 
 /* ─── SPECIALS ───────────────────────────────────────────── */
 .specials{background:var(--offwhite);padding:clamp(70px,13vw,110px) var(--pad);position:relative}
@@ -941,12 +978,53 @@ setTimeout(function(){
   </div>
 </section>
 
-<!-- WAITLIST STRIP -->
-<div class="wl-strip">
-  <div class="wl-strip-inner">
-    <div class="wl-strip-icon">&#x23F0;</div>
-    <p><strong>Fully booked?</strong> Don't worry — join the waitlist and we'll notify you the moment a slot opens.</p>
-    <button class="wl-strip-btn" id="wlTrigger"><span>Join the Waitlist &#x2197;</span></button>
+<!-- WAITLIST SECTION -->
+<div class="wl-section">
+  <div class="wl-section-grid">
+
+    <!-- Image Side -->
+    <div class="wl-img-side">
+      <img src="img4.jpeg" alt="Studio atmosphere">
+      <div class="wl-img-overlay"></div>
+      <div class="wl-spots-badge">
+        <span class="wl-spots-num">3</span>
+        <span class="wl-spots-label">Spots Left</span>
+      </div>
+      <div class="wl-img-caption">
+        <div class="wl-img-caption-tag">Currently Booking</div>
+        <div class="wl-img-caption-text">Spring 2026 installs</div>
+      </div>
+    </div>
+
+    <!-- Content Side -->
+    <div class="wl-content-side">
+      <div class="wl-eyebrow reveal">Availability</div>
+      <h2 class="wl-heading reveal stagger-1">We're Almost<br><em>Fully Booked</em></h2>
+      <p class="wl-subheading reveal stagger-2">Don't miss your spot this season</p>
+      <div class="wl-rule reveal stagger-2"></div>
+      <p class="wl-desc reveal stagger-3">Appointments fill up fast — but spots open regularly. <strong>Join the waitlist</strong> and we'll reach out the moment something becomes available. No spam, ever.</p>
+
+      <!-- Availability Pills -->
+      <div class="wl-avail reveal stagger-3">
+        <div class="wl-avail-pill open">
+          <span class="wl-avail-pill-dot"></span>Frontal Install
+        </div>
+        <div class="wl-avail-pill limited">
+          <span class="wl-avail-pill-dot"></span>Closure Install
+        </div>
+        <div class="wl-avail-pill full">
+          <span class="wl-avail-pill-dot"></span>Wig Revamp
+        </div>
+      </div>
+
+      <div class="wl-cta-row reveal stagger-4">
+        <button class="wl-btn wl-btn-primary" id="wlTrigger">
+          <span>Join the Waitlist &#x2197;</span>
+        </button>
+        <span class="wl-note-inline">Free &amp; no commitment</span>
+      </div>
+    </div>
+
   </div>
 </div>
 
@@ -1092,7 +1170,7 @@ setTimeout(function(){
         <h2 class="display" style="margin-top:8px">Contact <em>Us</em></h2>
         <p style="font-size:.77rem;line-height:1.9;color:var(--grey);margin-top:14px;font-weight:300">Have a question? We'd love to hear from you.</p>
         <div class="contact-info">
-          <div class="c-row"><div class="c-ico">&#9993;</div><a href="mailto:hello@flawlesswigstudio.com">hello@flawlesswigstudio.com</a></div>
+          <div class="c-row"><div class="c-ico">&#9993;</div><a href="/cdn-cgi/l/email-protection#076f626b6b6847616b66706b627474706e60747372636e682964686a"><span class="__cf_email__" data-cfemail="96fef3fafaf9d6f0faf7e1faf3e5e5e1fff1e5e2e3f2fff9b8f5f9fb">[email&#160;protected]</span></a></div>
           <div class="c-row"><div class="c-ico">&#9742;</div>(877) 297-5454</div>
           <div class="c-row"><div class="c-ico">&#9679;</div>6391 Elgin Celina, Delaware</div>
         </div>
@@ -1186,7 +1264,7 @@ setTimeout(function(){
   </div>
 </footer>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 (function(){
 /* ─── CURSOR ─────────────────────────── */
 var dot=document.getElementById('cursorDot'),ring=document.getElementById('cursorRing');
