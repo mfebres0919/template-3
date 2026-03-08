@@ -18,7 +18,7 @@
     sn.src = h + s + '.js' + v; f.parentNode.insertBefore(sn, f);
   })(window, document, 'script', 'https://assets.flodesk.com', '/universal', 'fd');
 </script>
-<script>window.fd('form', { formId: '69a48e33bb206090e7ad1921' });</script>
+<script>window.fd('form', { formId: '69ace25ea7411e99b28fc367' });</script>
 <style>
 /* ─── RESET ─────────────────────────────────────────────── */
 *,*::before,*::after {
@@ -3462,202 +3462,8 @@ footer {
 }
 
 
+
 /* ─── MODALS ─────────────────────────────────────────────── */
-.email-popup {
-  position:fixed;
-  inset:0;
-  z-index:500;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  padding:18px;
-  background:rgba(0,0,0,.7);
-  backdrop-filter:blur(16px);
-  -webkit-backdrop-filter:blur(16px);
-  opacity:0;
-  visibility:hidden;
-  transition:opacity .45s,visibility .45s;
-  pointer-events:none;
-}
-
-.email-popup.show {
-  opacity:1;
-  visibility:visible;
-  pointer-events:all;
-}
-
-.ep-card {
-  width:100%;
-  max-width:468px;
-  background:var(--white);
-  overflow:hidden;
-  box-shadow:0 40px 100px rgba(0,0,0,.35);
-  position:relative;
-  transform:translateY(28px) scale(.96);
-  transition:transform .5s cubic-bezier(.4,0,.2,1);
-}
-
-.email-popup.show .ep-card {
-  transform:translateY(0) scale(1);
-}
-
-.ep-x {
-  position:absolute;
-  top:12px;
-  right:12px;
-  width:28px;
-  height:28px;
-  border:1px solid var(--grey-border-lt);
-  background:var(--white);
-  color:var(--grey);
-  font-size:.7rem;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  cursor:pointer;
-  z-index:2;
-  transition:all .25s;
-  border-radius:50%;
-}
-
-.ep-x:hover {
-  border-color:var(--gold);
-  color:var(--black);
-}
-
-.ep-img {
-  position:relative;
-  height:200px;
-  overflow:hidden;
-}
-
-.ep-img img {
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  object-position:top;
-}
-
-.ep-img-veil {
-  position:absolute;
-  inset:0;
-  background:linear-gradient(to top,var(--white),transparent 60%);
-}
-
-.ep-badge {
-  position:absolute;
-  bottom:14px;
-  left:14px;
-  font-size:.44rem;
-  letter-spacing:.26em;
-  text-transform:uppercase;
-  font-weight:700;
-  background:var(--black);
-  color:var(--gold);
-  padding:5px 14px;
-  font-family:var(--sans);
-}
-
-.ep-body {
-  padding:24px;
-}
-
-.ep-tag {
-  font-size:.46rem;
-  letter-spacing:.34em;
-  text-transform:uppercase;
-  color:var(--gold);
-  font-weight:500;
-  margin-bottom:8px;
-  font-family:var(--sans);
-}
-
-.ep-title {
-  font-family:var(--display);
-  font-size:clamp(1.4rem,4vw,1.9rem);
-  font-weight:500;
-  line-height:1.12;
-  margin-bottom:10px;
-  letter-spacing:.02em;
-  color:var(--black);
-}
-
-.ep-title em {
-  font-style:normal;
-  color:var(--gold);
-}
-
-.ep-desc {
-  font-size:.75rem;
-  line-height:1.85;
-  color:var(--grey);
-  margin-bottom:18px;
-  font-weight:300;
-}
-
-.ep-form {
-  display:flex;
-  gap:8px;
-  flex-wrap:wrap;
-}
-
-.ep-input {
-  flex:1;
-  min-width:160px;
-  background:var(--offwhite);
-  border:1px solid var(--grey-border-lt);
-  padding:11px 16px;
-  color:var(--black);
-  font-family:var(--sans);
-  font-size:.76rem;
-  outline:none;
-  transition:border-color .3s,box-shadow .3s;
-  font-weight:300;
-}
-
-.ep-input::placeholder {
-  color:#ccc;
-}
-
-.ep-input:focus {
-  border-color:var(--gold);
-  box-shadow:0 0 0 3px rgba(200,169,126,.06);
-}
-
-.ep-submit {
-  background:var(--black);
-  color:var(--white);
-  border:none;
-  padding:11px 22px;
-  font-size:.5rem;
-  letter-spacing:.18em;
-  text-transform:uppercase;
-  font-weight:600;
-  cursor:pointer;
-  transition:all .3s;
-  font-family:var(--sans);
-}
-
-.ep-submit:hover {
-  background:var(--gold-dk);
-}
-
-.ep-skip {
-  display:block;
-  text-align:center;
-  margin-top:12px;
-  font-size:.52rem;
-  color:var(--grey-lt);
-  cursor:pointer;
-  letter-spacing:.1em;
-  transition:color .25s;
-  opacity:.45;
-}
-
-.ep-skip:hover {
-  opacity:.8;
-}
-
 .lightbox {
   position:fixed;
   inset:0;
@@ -4271,27 +4077,6 @@ setTimeout(function(){
   </div>
 </div>
 
-<!-- EMAIL POPUP -->
-<div class="email-popup" id="emailPopup">
-  <div class="ep-card">
-    <button class="ep-x" id="epX">&#x2715;</button>
-    <div class="ep-img">
-      <img src="img2.jpeg" alt="Flawless install">
-      <div class="ep-img-veil"></div>
-      <div class="ep-badge">Members Only</div>
-    </div>
-    <div class="ep-body" id="epBody">
-      <div class="ep-tag">Join the VIP List</div>
-      <h2 class="ep-title">Get <em>10% Off</em><br>Your First Install</h2>
-      <p class="ep-desc">Sign up for exclusive early booking access, VIP offers, and style inspo straight to your inbox.</p>
-      <div class="ep-form">
-        <input class="ep-input" type="email" id="epEmail" placeholder="Enter your email...">
-        <button class="ep-submit" id="epSubmit"><span>Claim Offer</span></button>
-      </div>
-      <span class="ep-skip" id="epSkip">No thanks, I'll pay full price</span>
-    </div>
-  </div>
-</div>
 
 <!-- LIGHTBOX -->
 <div class="lightbox" id="lb">
@@ -4954,26 +4739,10 @@ if(statsSection){
   cio.observe(statsSection);
 }
 
-/* ─── EMAIL POPUP ────────────────────── */
-var emailPopup=document.getElementById('emailPopup');
-function hideEmailPopup(){emailPopup.classList.remove('show');document.body.style.overflow='';sessionStorage.setItem('ep_done','1')}
-document.getElementById('epX').addEventListener('click',hideEmailPopup);
-document.getElementById('epSkip').addEventListener('click',hideEmailPopup);
-emailPopup.addEventListener('click',function(e){if(e.target===emailPopup)hideEmailPopup()});
-if(!sessionStorage.getItem('ep_done')){setTimeout(function(){emailPopup.classList.add('show');document.body.style.overflow='hidden'},5000)}
-
 function subscribeToFlodesk(email,ok,err){
   fetch('/.netlify/functions/subscribe',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email:email})})
   .then(function(r){if(r.ok||r.status===200||r.status===201)ok();else err()}).catch(function(){err()});
 }
-document.getElementById('epSubmit').addEventListener('click',function(){
-  var em=document.getElementById('epEmail').value.trim();
-  if(!em||!em.includes('@')){document.getElementById('epEmail').style.borderColor='var(--gold)';return}
-  subscribeToFlodesk(em,
-    function(){document.getElementById('epBody').innerHTML='<div style="text-align:center;padding:22px 0"><div style="font-size:2.4rem;margin-bottom:12px;color:var(--gold)">&#10003;</div><div style="font-family:Cinzel,serif;font-size:1.45rem;font-weight:400;margin-bottom:10px">You\'re on the list!</div><p style="font-size:.76rem;color:var(--grey);line-height:1.85">Your 10% code is on its way to <strong>'+em+'</strong>.</p><button onclick="hideEmailPopup()" style="margin-top:20px;display:inline-flex;padding:11px 26px;font-size:.52rem;letter-spacing:.18em;text-transform:uppercase;font-weight:600;background:var(--black);color:#fff;border:none;cursor:pointer;font-family:Jost,sans-serif">Continue</button></div>';setTimeout(hideEmailPopup,4500)},
-    function(){document.getElementById('epBody').innerHTML='<div style="text-align:center;padding:22px 0"><div style="font-size:2.4rem;margin-bottom:12px">&#x26A0;</div><p style="font-size:.76rem;color:var(--grey);line-height:1.85">Something went wrong.</p><button onclick="hideEmailPopup()" style="margin-top:20px;display:inline-flex;padding:11px 26px;font-size:.52rem;letter-spacing:.18em;text-transform:uppercase;font-weight:600;background:#ddd;color:var(--black);border:none;cursor:pointer;font-family:Jost,sans-serif">Close</button></div>'}
-  );
-});
 
 /* ─── FOOTER SUBSCRIBE ───────────────── */
 document.getElementById('footerSubscribe').addEventListener('click',function(){
