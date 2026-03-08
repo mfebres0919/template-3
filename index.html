@@ -3282,7 +3282,6 @@ to {
 }
 
 
-
 /* ─── FOOTER ─────────────────────────────────────────────── */
 footer {
   background:var(--black);
@@ -4844,7 +4843,7 @@ setTimeout(function(){
         <div class="pol-row"><div class="pol-row-num">04</div><div class="pol-row-body"><div class="pol-row-title">24-Hour Cancellation</div><p class="pol-row-text">Cancel or reschedule at least 24 hours in advance to avoid a cancellation fee.</p></div></div>
         <div class="pol-row"><div class="pol-row-num">05</div><div class="pol-row-body"><div class="pol-row-title">Bring Inspiration Photos</div><p class="pol-row-text">Come with reference photos ready so we can create your perfect look together.</p></div></div>
         <div class="pol-row"><div class="pol-row-num">06</div><div class="pol-row-body"><div class="pol-row-title">No Extra Guests</div><p class="pol-row-text">To keep the studio calm and focused, no extra guests unless previously approved.</p></div></div>
-        <div class="pol-cta"><button class="btn btn-b btn-gold" id="polBook" style="width:100%;justify-content:center;"><span>Book Now</span></button></div>
+        <div class="pol-cta"><button class="btn btn-b" id="polBook" style="width:100%;justify-content:center;"><span>Book Now</span></button></div>
       </div>
     </div>
   </div>
@@ -5018,7 +5017,7 @@ document.getElementById('wlSubmit').addEventListener('click',function(){
 
 /* ─── BOOKING ────────────────────────── */
 var bmOverlay=document.getElementById('bmOverlay'),bmLoader=document.getElementById('bmLoader'),bmSvcTag=document.getElementById('bmSvcTag'),bmWidgetSlot=document.getElementById('bmWidgetSlot');
-var storeMap={'Frontal Wig Install':'vagaroStore1','Closure Install':'vagaroStore2','Wig Revamp':'vagaroStore3','Custom Styling':'vagaroStore4'};
+var storeMap={'Frontal Wig Install':'vagaroStore1','Closure Install':'vagaroStore2','Wig Revamp':'vagaroStore3','Custom Styling':'vagaroStore4','Install + Revamp Bundle':'vagaroStore5','First Install Discount':'vagaroStore6'};
 var activeStoreId=null;
 function openBooking(svc,label){
   var displayLabel=label||svc||'Book Appointment';
@@ -5066,7 +5065,7 @@ function scrollToServices(){var el=document.getElementById('services');if(el)el.
     scrollToServices();
   });
 });
-var dealMap={dealBtn1:'Frontal Wig Install',dealBtn2:'Frontal Wig Install'};
+var dealMap={dealBtn1:'First Install Discount',dealBtn2:'Install + Revamp Bundle'};
 Object.keys(dealMap).forEach(function(id){var el=document.getElementById(id);if(el)el.addEventListener('click',function(e){e.stopPropagation();openBooking(dealMap[id])})});
 var svcBtnMap={svcBtn1:'Frontal Wig Install',svcBtn2:'Closure Install',svcBtn3:'Wig Revamp',svcBtn4:'Custom Styling'};
 Object.keys(svcBtnMap).forEach(function(id){var el=document.getElementById(id);if(el)el.addEventListener('click',function(e){e.stopPropagation();openBooking(svcBtnMap[id])})});
@@ -5162,6 +5161,13 @@ lb.addEventListener('click',function(e){if(e.target===lb)closeLb()});
 </div>
 <div id="vagaroStore4" style="position:fixed;top:-9999px;left:-9999px;width:600px;z-index:-1;">
   <div class="vagaro" style="width:100%;padding:0;border:0;margin:0 auto;text-align:center;"><style>.vagaro a{font-size:14px;color:#AAA;text-decoration:none;}</style><a href="https://www.vagaro.com/pro/">Powered by Vagaro</a>&nbsp;<a href="https://www.vagaro.com/pro/salon-software">Salon Software</a>,&nbsp;<a href="https://www.vagaro.com/pro/spa-software">Spa Software</a>&nbsp;&amp;&nbsp;<a href="https://www.vagaro.com/pro/fitness-software">Fitness Software</a><script type="text/javascript" src="https://www.vagaro.com//resources/WidgetEmbeddedLoader/OZqqCZOrC3WcT3qmV35y6RuRFXoSlXYO61Cq7fYO61WO4pkUcvCu7gCmjZcoapOUc9CvdfQOapkvdfYOc9gP6m?v=wLTMaKCPhRF0WqWUZ8kFY0SgcegyaAwaLx9V2Skus4C#"></script></div>
+</div>
+
+<div id="vagaroStore5" style="position:fixed;top:-9999px;left:-9999px;width:600px;z-index:-1;">
+  <div class="vagaro" style="width:100%;padding:0;border:0;margin:0 auto;text-align:center;"><style>.vagaro a{font-size:14px;color:#AAA;text-decoration:none;}</style><a href="https://www.vagaro.com/pro/">Powered by Vagaro</a>&nbsp;<a href="https://www.vagaro.com/pro/salon-software">Salon Software</a>,&nbsp;<a href="https://www.vagaro.com/pro/spa-software">Spa Software</a>&nbsp;&amp;&nbsp;<a href="https://www.vagaro.com/pro/fitness-software">Fitness Software</a><script type="text/javascript" src="https://www.vagaro.com//resources/WidgetEmbeddedLoader/OZqqCZOrC3WcT3qmV35y6RuRFXoSlXYO61Cq7fYO61WO4pkUcvCu7gCmjZcoapOUc9CvdfQOapkvdfYOc9gPc8?v=WTSnlIoP18cqG1UCRL6BcQ79Zvn8hIzdnyAgyNw3wO6W#"></script></div>
+</div>
+<div id="vagaroStore6" style="position:fixed;top:-9999px;left:-9999px;width:600px;z-index:-1;">
+  <div class="vagaro" style="width:100%;padding:0;border:0;margin:0 auto;text-align:center;"><style>.vagaro a{font-size:14px;color:#AAA;text-decoration:none;}</style><a href="https://www.vagaro.com/pro/">Powered by Vagaro</a>&nbsp;<a href="https://www.vagaro.com/pro/salon-software">Salon Software</a>,&nbsp;<a href="https://www.vagaro.com/pro/spa-software">Spa Software</a>&nbsp;&amp;&nbsp;<a href="https://www.vagaro.com/pro/fitness-software">Fitness Software</a><script type="text/javascript" src="https://www.vagaro.com//resources/WidgetEmbeddedLoader/OZqqCZOrC3WcT3qmV35y6RuRFXoSlXYO61Cq7fYO61WO4pkUcvCu7gCmjZcoapOUc9CvdfQOapkvdfYOc9gPcG?v=UVr3tTY9VeUGI0ygFIqUFeeCZPIkOz52AWvRGohw7wk#"></script></div>
 </div>
 
 </body>
